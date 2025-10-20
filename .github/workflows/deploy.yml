@@ -12,6 +12,25 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v4
 
+      - name: Verificar secrets (DEBUG)
+        run: |
+          echo "Verificando secrets..."
+          if [ -z "${{ secrets.FTP_SERVER }}" ]; then
+            echo "❌ FTP_SERVER no está configurado"
+          else
+            echo "✅ FTP_SERVER está configurado"
+          fi
+          if [ -z "${{ secrets.FTP_USERNAME }}" ]; then
+            echo "❌ FTP_USERNAME no está configurado"
+          else
+            echo "✅ FTP_USERNAME está configurado"
+          fi
+          if [ -z "${{ secrets.FTP_PASSWORD }}" ]; then
+            echo "❌ FTP_PASSWORD no está configurado"
+          else
+            echo "✅ FTP_PASSWORD está configurado"
+          fi
+
       # Paso opcional: Si necesitas compilar, instalar dependencias, etc.
       # - name: Instalar dependencias
       #   run: npm install
