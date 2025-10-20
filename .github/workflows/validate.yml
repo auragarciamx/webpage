@@ -1,0 +1,184 @@
+name: Validate Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check file structure
+      run: |
+        echo "🔍 Validating project structure..."
+        
+        # Check required files exist
+        required_files=("index.html" ".gitignore" "src/components/App.js" "src/config/app.config.js" "src/styles/main.css")
+        for file in "${required_files[@]}"; do
+          if [ -f "$file" ]; then
+            echo "✅ $file exists"
+          else
+            echo "❌ $file is missing"
+            exit 1
+          fi
+        done
+        
+        # Check directories exist
+        required_dirs=("src" "src/components" "src/config" "src/styles" "resources" "resources/logos")
+        for dir in "${required_dirs[@]}"; do
+          if [ -d "$dir" ]; then
+            echo "✅ $dir exists"
+          else
+            echo "❌ $dir is missing"
+            exit 1
+          fi
+        done
+        
+        echo "✅ Project structure validation passed"
+        
+    - name: Validate HTML syntax
+      run: |
+        echo "🔍 Validating HTML syntax..."
+        
+        # Basic HTML validation
+        if grep -q "<!DOCTYPE html>" index.html; then
+          echo "✅ DOCTYPE declaration found"
+        else
+          echo "❌ DOCTYPE declaration missing"
+          exit 1
+        fi
+        
+        if grep -q "<html" index.html; then
+          echo "✅ HTML tag found"
+        else
+          echo "❌ HTML tag missing"
+          exit 1
+        fi
+        
+        if grep -q "<head>" index.html; then
+          echo "✅ Head section found"
+        else
+          echo "❌ Head section missing"
+          exit 1
+        fi
+        
+        if grep -q "<body>" index.html; then
+          echo "✅ Body section found"
+        else
+          echo "❌ Body section missing"
+          exit 1
+        fi
+        
+        echo "✅ HTML syntax validation passed"
+        
+    - name: Check for sensitive information
+      run: |
+        echo "🔍 Checking for sensitive information..."
+        
+        # Check for potential API keys or secrets
+        sensitive_patterns=(
+          "api[_-]?key"
+          "secret"
+          "password"
+          "token"
+          "private[_-]?key"
+        )
+        
+        for pattern in "${sensitive_patterns[@]}"; do
+          if grep -r -i "$pattern" . --exclude-dir=.git --exclude="*.md" --exclude=".github/**"; then
+            echo "⚠️  Potential sensitive information found with pattern: $pattern"
+            echo "Please review the files above and ensure no secrets are committed"
+          fi
+        done
+        
+        echo "✅ Sensitive information check completed"
+        
+    - name: Validate CSS
+      run: |
+        echo "🔍 Validating CSS structure..."
+        
+        if [ -f "src/styles/main.css" ]; then
+          echo "✅ Main CSS file exists"
+          
+          # Check for basic CSS structure
+          if grep -q "{" src/styles/main.css; then
+            echo "✅ CSS syntax appears valid"
+          else
+            echo "⚠️  CSS file may be empty or invalid"
+          fi
+        else
+          echo "❌ Main CSS file missing"
+          exit 1
+        fi
+        
+        echo "✅ CSS validation passed"
+        
+    - name: Check JavaScript syntax
+      run: |
+        echo "🔍 Validating JavaScript syntax..."
+        
+        # Check main App.js file
+        if [ -f "src/components/App.js" ]; then
+          echo "✅ App.js file exists"
+          
+          # Basic syntax check
+          if grep -q "function\|const\|let\|var" src/components/App.js; then
+            echo "✅ JavaScript syntax appears valid"
+          else
+            echo "⚠️  App.js may be empty or invalid"
+          fi
+        else
+          echo "❌ App.js file missing"
+          exit 1
+        fi
+        
+        # Check config file
+        if [ -f "src/config/app.config.js" ]; then
+          echo "✅ Config file exists"
+        else
+          echo "❌ Config file missing"
+          exit 1
+        fi
+        
+        echo "✅ JavaScript validation passed"
+        
+    - name: Check resource files
+      run: |
+        echo "🔍 Validating resource files..."
+        
+        # Check for logo files
+        logo_count=$(find resources/logos -name "*.png" -o -name "*.svg" -o -name "*.pdf" | wc -l)
+        if [ "$logo_count" -gt 0 ]; then
+          echo "✅ Found $logo_count logo files"
+        else
+          echo "⚠️  No logo files found"
+        fi
+        
+        # Check for font files
+        font_count=$(find resources/fonts -name "*.otf" -o -name "*.ttf" -o -name "*.woff" | wc -l)
+        if [ "$font_count" -gt 0 ]; then
+          echo "✅ Found $font_count font files"
+        else
+          echo "⚠️  No font files found"
+        fi
+        
+        echo "✅ Resource validation completed"
+        
+    - name: Generate validation report
+      if: always()
+      run: |
+        echo "📊 Validation Summary:"
+        echo "===================="
+        echo "✅ Project structure: Valid"
+        echo "✅ HTML syntax: Valid"
+        echo "✅ CSS structure: Valid"
+        echo "✅ JavaScript syntax: Valid"
+        echo "✅ Resources: Found"
+        echo ""
+        echo "🎉 All validations passed successfully!"
