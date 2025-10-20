@@ -31,7 +31,7 @@ jobs:
           # Directorio local a subir (ej. 'dist' si se compila)
           local-dir: ./ # Sube todo el repositorio, ajusta si es necesario
           # Directorio remoto en el servidor FTP
-          server-dir: /home/avragarc/public_html/ # Ajusta a la ruta de tu servidor
+          server-dir: /public_html/ # Ajusta a la ruta de tu servidor
           # Opciones de protocolo, por defecto es 'ftp', usa 'ftps' para cifrado
           protocol: ftp
           # Otras opciones:
