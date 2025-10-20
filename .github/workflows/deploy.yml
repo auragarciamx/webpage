@@ -22,11 +22,11 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           # Servidor FTP
-          server: ${{ secrets.FTP_SERVER }}
+          server: ${{ webpage_prod.FTP_SERVER }}
           # Nombre de usuario FTP
-          username: ${{ secrets.FTP_USERNAME }}
+          username: ${{ webpage_prod.FTP_USERNAME }}
           # Contraseña FTP
-          password: ${{ secrets.FTP_PASSWORD }}
+          password: ${{ webpage_prod.FTP_PASSWORD }}
           # Directorio local a subir (ej. 'dist' si se compila)
           local-dir: ./ # Sube todo el repositorio, ajusta si es necesario
           # Directorio remoto en el servidor FTP
