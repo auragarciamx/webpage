@@ -313,3 +313,11 @@ performance-logs/
 # Archivos de seguridad
 security-audit.json
 vulnerability-report.json
+
+# ===========================================
+# Archivos Locales de Preview / Desarrollo
+# ===========================================
+
+# Archivos de preview local (vendor CDN local para screenshots)
+vendor/
+preview.html
