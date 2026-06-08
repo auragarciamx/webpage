@@ -71,56 +71,56 @@ const AuraGarciaApp = () => {
   ];
 
   const services = [
-    { title: 'Estrategia Digital en Salud',   description: 'Diagnóstico integral y hoja de ruta personalizada para la transformación digital de tu institución.', timeframe: '4-6 sem', icon: 'map-pin', featured: true },
-    { title: 'Datos Conectados',              description: 'Integramos tus sistemas para que hablen entre sí, creando flujos de información fluidos entre departamentos.', timeframe: '6-8 sem', icon: 'network' },
-    { title: 'Inteligencia Hospitalaria',     description: 'Tableros que transforman datos en decisiones con KPIs ejecutivos y clínicos en tiempo real.', timeframe: '4-8 sem', icon: 'bar-chart' },
-    { title: 'IA Médica Aplicada',            description: 'Modelos predictivos para diagnóstico y gestión, con herramientas de IA validadas y operativas.', timeframe: '8-12 sem', icon: 'brain' },
-    { title: 'Productos AuraGarcia',          description: 'SALV.IA, MamRisk y CLARA: soluciones probadas, no prototipos. Tecnología adaptable a tus necesidades.', timeframe: '2-4 sem', icon: 'package' },
-    { title: 'Transformación Organizacional', description: 'Formación y cambio cultural para adopción exitosa, con equipos capacitados y procesos optimizados.', timeframe: 'Continuo', icon: 'users' },
+    { title: 'Estrategia Digital en Salud',   description: 'Hoja de ruta clara para tu transformación digital.', timeframe: '4-6 sem', icon: 'map-pin', featured: true },
+    { title: 'Datos Conectados',              description: 'Tus sistemas hablando entre sí, sin silos de información.', timeframe: '6-8 sem', icon: 'network' },
+    { title: 'Inteligencia Hospitalaria',     description: 'KPIs clínicos y ejecutivos en tiempo real.', timeframe: '4-8 sem', icon: 'bar-chart' },
+    { title: 'IA Médica Aplicada',            description: 'IA para diagnóstico y gestión. Validada, operativa.', timeframe: '8-12 sem', icon: 'brain' },
+    { title: 'Productos AuraGarcia',          description: 'SALV.IA, MamRisk y CLARA. Probadas, no prototipos.', timeframe: '2-4 sem', icon: 'package' },
+    { title: 'Transformación Organizacional', description: 'Equipos capacitados y procesos optimizados para el cambio.', timeframe: 'Continuo', icon: 'users' },
   ];
 
   const methodologySteps = [
-    { letter: 'A', title: 'Analizar',   subtitle: 'Entendemos tu realidad actual',      description: 'Analizamos procesos, datos y equipos para detectar oportunidades de mejora.', result: 'Mapa claro de dónde estás y hacia dónde ir' },
-    { letter: 'U', title: 'Unificar',   subtitle: 'Conectamos tus sistemas',            description: 'Estandarizamos datos y creamos flujos entre departamentos.',                    result: 'Información que fluye sin barreras' },
-    { letter: 'R', title: 'Reinventar', subtitle: 'Construimos soluciones que funcionan', description: 'Desarrollamos herramientas centradas en casos de uso reales.',              result: 'Tecnología que tu equipo realmente usa' },
-    { letter: 'A', title: 'Ampliar',    subtitle: 'Escalamos y optimizamos',            description: 'Medimos impacto y expandimos lo que funciona.',                               result: 'Crecimiento sostenible con métricas claras' },
+    { letter: 'A', title: 'Analizar',   subtitle: 'Entendemos tu realidad actual',      description: 'Mapeamos procesos, datos y equipos para encontrar el valor oculto.',  result: 'Mapa de situación y hoja de ruta' },
+    { letter: 'U', title: 'Unificar',   subtitle: 'Conectamos tus sistemas',            description: 'Datos estandarizados, flujos entre departamentos, cero silos.',        result: 'Información que fluye sin barreras' },
+    { letter: 'R', title: 'Reinventar', subtitle: 'Construimos lo que funciona',        description: 'Herramientas diseñadas desde casos de uso clínicos reales.',           result: 'Tecnología que tu equipo realmente usa' },
+    { letter: 'A', title: 'Ampliar',    subtitle: 'Escalamos y optimizamos',            description: 'Medimos, ajustamos y expandimos lo que genera impacto.',               result: 'Escala con métricas claras' },
   ];
 
   const whyUs = [
-    { title: 'Experiencia Clínica Real',     description: 'Nuestro equipo combina expertise técnico con experiencia clínica directa. Entendemos los desafíos reales de los hospitales.',                   icon: 'heart-pulse' },
-    { title: 'Productos Listos para Usar',   description: 'SALV.IA, MamRisk y CLARA son soluciones probadas. Implementación inmediata con resultados medibles.',                                          icon: 'rocket' },
-    { title: 'Metodología AURA Probada',     description: 'Proceso estructurado de 4 fases que garantiza resultados. De la idea a valor clínico medible en semanas.',                                    icon: 'git-merge' },
-    { title: 'Compliance y Seguridad',       description: 'Cumplimiento total con RGPD, ISO 27001 y normativas sanitarias. Seguridad de datos como prioridad absoluta.',                                 icon: 'shield' },
-    { title: 'Soporte Continuo',             description: 'Acompañamiento post-implementación con formación, soporte técnico y optimización continua de resultados.',                                     icon: 'headphones' },
-    { title: 'ROI Medible',                  description: 'Retorno de inversión claro y medible. Reducción de costos operativos y mejora en calidad de atención documentada.',                           icon: 'trending-up' },
+    { title: 'Experiencia Clínica Real',     description: 'Técnicos con experiencia clínica directa. Entendemos los desafíos del hospital porque los hemos vivido.',  icon: 'heart-pulse' },
+    { title: 'Soluciones, no pilotos',       description: 'SALV.IA, MamRisk y CLARA funcionan hoy. Sin prototipos, sin esperas.',                                     icon: 'rocket' },
+    { title: 'Metodología AURA',             description: '4 fases, del diagnóstico a valor clínico medible en semanas.',                                             icon: 'git-merge' },
+    { title: 'Compliance y Seguridad',       description: 'RGPD, ISO 27001 y normativa sanitaria. Sin excepciones.',                                                  icon: 'shield' },
+    { title: 'Soporte Continuo',             description: 'Contigo hasta que el cambio sea permanente.',                                                              icon: 'headphones' },
+    { title: 'ROI Medible',                  description: 'Menos costes operativos, mejor atención, todo documentado.',                                               icon: 'trending-up' },
   ];
 
   const eaiServices = [
-    { title: 'Agentes IA Clínicos',   description: 'Automatización de flujos de trabajo médico con agentes inteligentes que entienden el contexto clínico.',                          icon: 'cpu',            featured: true },
-    { title: 'Integración LLM',       description: 'Modelos de lenguaje adaptados al dominio de la salud: notas clínicas, codificación, resúmenes de historiales.',                  icon: 'brain' },
-    { title: 'Automatización RPA',    description: 'Eliminación de tareas repetitivas sin intervención humana: facturación, alta de pacientes, informes periódicos.',                 icon: 'zap' },
-    { title: 'IA Conversacional',     description: 'Chatbots especializados para pacientes y staff: triaje inicial, recordatorios, gestión de citas, soporte 24/7.',                  icon: 'message-circle' },
+    { title: 'Agentes IA Clínicos',   description: 'Agentes que automatizan flujos clínicos completos sin intervención humana.',                        icon: 'cpu',            featured: true },
+    { title: 'Integración LLM',       description: 'LLMs para notas clínicas, codificación y resúmenes de historiales.',                               icon: 'brain' },
+    { title: 'Automatización RPA',    description: 'Facturación, altas e informes sin intervención humana.',                                           icon: 'zap' },
+    { title: 'IA Conversacional',     description: 'Triaje, citas y soporte 24/7 para pacientes y staff.',                                             icon: 'message-circle' },
   ];
 
   const analyticsServices = [
-    { title: 'Nearshore Data Teams',        description: 'Senior data scientists and engineers embedded in your team at 40-60% of US/EU cost, with full healthcare specialization.',  icon: 'users' },
-    { title: 'Healthcare BI & Dashboards',  description: 'Real-time KPI dashboards for clinical and executive teams. HL7/FHIR-compatible, customized to your workflows.',             icon: 'bar-chart' },
-    { title: 'Data Engineering',            description: 'End-to-end data pipelines: HL7, FHIR, interoperability, ETL processes, and cloud data warehouse architecture.',            icon: 'database' },
-    { title: 'Advanced Analytics',          description: 'Predictive models, ML pipelines, and model ops for patient outcomes, readmission risk, and resource optimization.',         icon: 'trending-up' },
+    { title: 'Nearshore Data Teams',        description: 'Senior data scientists in your team. Healthcare-native. 40-60% of US/EU rates.',                   icon: 'users' },
+    { title: 'Healthcare BI & Dashboards',  description: 'Real-time dashboards for clinical and exec teams. HL7/FHIR-ready.',                                icon: 'bar-chart' },
+    { title: 'Data Engineering',            description: 'HL7, FHIR, ETL and cloud data warehouse. End-to-end.',                                             icon: 'database' },
+    { title: 'Advanced Analytics',          description: 'Predictive models for outcomes, readmissions, and resource use.',                                   icon: 'trending-up' },
   ];
 
   const medEquipServices = [
-    { title: 'Diagnóstico por Imagen',  description: 'Ecógrafos portátiles, equipos de radiología digital, resonancias de última generación a precios competitivos.',                    icon: 'microscope' },
-    { title: 'Equipamiento de UCI',     description: 'Monitores multiparamétricos, ventiladores, bombas de infusión y desfibriladores con garantía y soporte técnico.',                 icon: 'activity' },
-    { title: 'Tecnología Quirúrgica',   description: 'Instrumental de precisión, equipos de laparoscopia, mesas quirúrgicas y sistemas de iluminación de alto rendimiento.',             icon: 'layers' },
-    { title: 'Equipos de Laboratorio',  description: 'Analizadores hematológicos, PCR, bioquímica clínica y equipos de microbiología con formación incluida.',                           icon: 'cpu' },
+    { title: 'Diagnóstico por Imagen',  description: 'Ecógrafos, radiología digital y resonancias. Precios de importación directa.',   icon: 'microscope' },
+    { title: 'Equipamiento de UCI',     description: 'Monitores, ventiladores y desfibriladores. Garantía y soporte incluidos.',        icon: 'activity' },
+    { title: 'Tecnología Quirúrgica',   description: 'Laparoscopia, instrumental quirúrgico e iluminación de alto rendimiento.',        icon: 'layers' },
+    { title: 'Equipos de Laboratorio',  description: 'Hematología, PCR y microbiología. Formación del personal incluida.',              icon: 'cpu' },
   ];
 
   const marketingServices = [
-    { title: 'SEO Médico',          description: 'Posicionamiento orgánico para clínicas, consultas y hospitales. Estrategia de contenido con rigor clínico y cumplimiento normativo.', icon: 'search' },
-    { title: 'Social Media Clínico',description: 'Gestión de redes sociales especializada en salud. Contenido que educa, genera confianza y atrae pacientes.',                           icon: 'share-2' },
-    { title: 'Paid Ads para Salud', description: 'Campañas de Google y Meta optimizadas dentro del marco regulatorio sanitario. CPL medible y ROI garantizado.',                        icon: 'megaphone' },
-    { title: 'Contenido Médico',    description: 'Blog, newsletters, casos clínicos y educación para pacientes. Copywriting especializado con validación médica.',                       icon: 'edit' },
+    { title: 'SEO Médico',          description: 'Posicionamiento para clínicas y hospitales. Contenido clínicamente riguroso.',  icon: 'search' },
+    { title: 'Social Media Clínico',description: 'Contenido que educa, genera confianza y atrae pacientes.',                     icon: 'share-2' },
+    { title: 'Paid Ads para Salud', description: 'Google y Meta dentro del marco sanitario. ROI garantizado.',                   icon: 'megaphone' },
+    { title: 'Contenido Médico',    description: 'Blog, newsletters y casos clínicos con validación médica.',                    icon: 'edit' },
   ];
 
   // IntersectionObserver for navbar scroll state (replaces window scroll listener)
@@ -298,7 +298,7 @@ const AuraGarciaApp = () => {
             </h1>
 
             <p className={`text-lg md:text-xl leading-relaxed mb-10 max-w-lg font-light reveal-hidden delay-2 ${dk ? 'text-gray-300' : 'text-gray-600'}`}>
-              Cinco divisiones especializadas para transformar la salud digital: datos, IA, equipos, marketing y más.
+              Todo lo que necesitas para liderar la salud digital, en una sola empresa.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12 reveal-hidden delay-3">
@@ -436,7 +436,7 @@ const AuraGarciaApp = () => {
               style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
               Metodología <span style={{ color: '#818CF8' }}>AURA</span>
             </h2>
-            <p className={`text-lg font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>De la idea a valor clínico medible, sin ruido</p>
+            <p className={`text-lg font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>De la idea a valor clínico medible.</p>
           </div>
 
           <div className="relative max-w-2xl">
@@ -478,7 +478,7 @@ const AuraGarciaApp = () => {
                 Por qué trabajar<br />con nosotros
               </h2>
               <p className={`text-base font-light mb-10 ${dk ? 'text-gray-400' : 'text-gray-500'}`}>
-                No somos una consultora genérica. Vivimos en la intersección de la clínica y la tecnología.
+                No somos genéricos. Vivimos en la intersección de la clínica y la tecnología.
               </p>
               <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: '4/3' }}>
                 <img src="https://picsum.photos/seed/healthcare-team/500/375" alt="Healthcare team"
@@ -520,7 +520,7 @@ const AuraGarciaApp = () => {
               IA que trabaja<br />
               <span style={{ color: '#A78BFA' }}>para tu clínica</span>
             </h2>
-            <p className={`text-lg font-light max-w-xl ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Agentes, automatización y LLMs especializados en el dominio de la salud</p>
+            <p className={`text-lg font-light max-w-xl ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Agentes, automatización y LLMs para salud.</p>
           </div>
 
           {/* Feature spotlight: 1 big (2/3) + 3 stacked (1/3) */}
@@ -591,7 +591,7 @@ const AuraGarciaApp = () => {
                 <span style={{ color: '#22D3EE' }}>nearshored for healthcare</span>
               </h2>
               <p className={`text-base font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>
-                Senior healthcare data scientists and engineers embedded in your team at 40-60% of US/EU rates.
+                Senior data scientists in your team. Healthcare-native. 40-60% of US/EU rates.
               </p>
             </div>
           </div>
@@ -653,7 +653,7 @@ const AuraGarciaApp = () => {
                 <span style={{ color: '#34D399' }}>de vanguardia</span>
               </h2>
               <p className={`text-base font-light mb-8 ${dk ? 'text-gray-400' : 'text-gray-500'}`}>
-                Importación directa de equipos de primera línea a precios competitivos, con soporte completo
+                Equipos de primera línea, importación directa, soporte incluido.
               </p>
               <div className="flex flex-wrap gap-2">
                 {['Precios competitivos','Garantía y soporte técnico','Importación directa','Formación del personal','Entrega rápida'].map(item => (
@@ -712,7 +712,7 @@ const AuraGarciaApp = () => {
               Visibilidad digital<br />
               <span style={{ color: '#FBBF24' }}>para profesionales</span>
             </h2>
-            <p className={`text-lg font-light max-w-lg ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Marketing especializado en salud con conocimiento clínico real y cumplimiento normativo</p>
+            <p className={`text-lg font-light max-w-lg ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Marketing de salud con rigor clínico y cumplimiento normativo.</p>
           </div>
 
           {/* Editorial list */}
@@ -755,14 +755,14 @@ const AuraGarciaApp = () => {
               style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
               Resultados que hablan
             </h2>
-            <p className={`text-lg font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Hospitales que transformaron su operación con nuestra metodología</p>
+            <p className={`text-lg font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Instituciones que ya están en el futuro.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {[
-              { metric: '40%',   quote: 'Reducción en tiempo de diagnóstico con SALV.IA. Nuestros cardiólogos identifican arritmias complejas en segundos.', role: 'Jefa de Cardiología, Hospital Madrid',   initials: 'MG' },
-              { metric: '6 sem', quote: 'De la idea a implementación. AuraGarcia conectó todos nuestros sistemas en tiempo récord con resultados desde el primer día.', role: 'CTO, Clínica Barcelona',   initials: 'CR' },
-              { metric: '85%',   quote: 'Mejora en precisión de detección. MamRisk ha revolucionado nuestro programa de screening.',  role: 'Radióloga, Hospital Valencia',         initials: 'AM' },
+              { metric: '40%',   quote: 'Con SALV.IA nuestros cardiólogos identifican arritmias complejas en segundos.', role: 'Jefa de Cardiología, Hospital Madrid', initials: 'MG' },
+              { metric: '6 sem', quote: 'Conectaron todos nuestros sistemas en tiempo récord. Resultados desde el día uno.',          role: 'CTO, Clínica Barcelona',              initials: 'CR' },
+              { metric: '85%',   quote: 'MamRisk revolucionó nuestro programa de screening.',                                         role: 'Radióloga, Hospital Valencia',        initials: 'AM' },
             ].map((t, i) => (
               <div key={i} className={`${dk ? 'card-glass-dark' : 'card-glass-light'} p-8 rounded-2xl reveal-hidden delay-${i+1} relative overflow-hidden card-hover`}>
                 <div className={`quote-mark absolute top-2 right-5 ${dk ? 'text-white' : 'text-gray-900'}`}>"</div>
@@ -849,7 +849,7 @@ const AuraGarciaApp = () => {
                 <button type="submit" className="w-full btn-gradient-primary py-4 rounded-full text-sm font-medium inline-flex justify-center items-center gap-2">
                   Enviar mensaje <Icon name="arrow-right" size={16} color="white" />
                 </button>
-                <p className={`text-xs font-light text-center ${dk ? 'text-gray-600' : 'text-gray-400'}`}>Al enviar aceptas nuestra política de privacidad. No compartimos tu información.</p>
+                <p className={`text-xs font-light text-center ${dk ? 'text-gray-600' : 'text-gray-400'}`}>Privacidad garantizada. Sin spam.</p>
               </form>
             </div>
 
@@ -876,7 +876,7 @@ const AuraGarciaApp = () => {
 
               <div className="rounded-2xl p-6" style={{ background: dk ? 'rgba(99,102,241,0.08)' : 'rgba(238,242,255,1)', border: dk ? '1px solid rgba(99,102,241,0.18)' : '1px solid rgba(99,102,241,0.12)' }}>
                 <p className={`text-xs uppercase tracking-widest mb-3 ${dk ? 'text-indigo-400' : 'text-indigo-600'}`}>Respuesta garantizada</p>
-                <p className={`text-sm font-light leading-relaxed ${dk ? 'text-gray-300' : 'text-gray-600'}`}>Respondemos en menos de 24h. Primera consulta gratuita sin compromiso.</p>
+                <p className={`text-sm font-light leading-relaxed ${dk ? 'text-gray-300' : 'text-gray-600'}`}>Respuesta en menos de 24h. Primera consulta gratuita.</p>
               </div>
 
               <div className={`rounded-2xl p-6 ${dk ? 'bg-white/3 border border-white/8' : 'bg-white border border-gray-100 shadow-sm'}`}>
@@ -945,7 +945,7 @@ const AuraGarciaApp = () => {
           <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-4">
               <img src="resources/logos/AuragarciaLogoVector-2.png" alt="AuraGarcia" className="h-6 w-auto brightness-0 invert" />
-              <p className="text-sm font-light text-gray-500">© 2025 AuraGarcia. Todos los derechos reservados.</p>
+              <p className="text-sm font-light text-gray-500">© 2026 AuraGarcia. Todos los derechos reservados.</p>
             </div>
             <p className="text-xs font-light text-gray-600">Consultoría en transformación digital sanitaria · Madrid, España</p>
           </div>
