@@ -1,4 +1,6 @@
 // auragarcia - Plataforma Multi-División
+// Design Read: B2B healthcare SaaS platform · clinical-precision aesthetic
+// DESIGN_VARIANCE: 6 | MOTION_INTENSITY: 3 | VISUAL_DENSITY: 5
 const { useState, useEffect, useRef } = React;
 
 // === ICON COMPONENT ===
@@ -38,6 +40,7 @@ const Icon = ({ name, size = 24, color = 'currentColor', className = '' }) => {
     'sun': <><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></>,
     'globe': <><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></>,
     'linkedin': <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></>,
+    'arrow-up-right': <><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></>,
   };
   const content = icons[name];
   if (!content) return null;
@@ -56,12 +59,10 @@ const AuraGarciaApp = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showDivisionsMenu, setShowDivisionsMenu] = useState(false);
   const [showAuraEffect, setShowAuraEffect] = useState(false);
-  const [activeService, setActiveService] = useState(0);
   const [activeMethodologyStep, setActiveMethodologyStep] = useState(0);
   const [methodologyLineProgress, setMethodologyLineProgress] = useState(0);
 
   const methodologyRef = useRef(null);
-  const scrollContainerRef = useRef(null);
 
   const handleThemeToggle = () => {
     setShowAuraEffect(true);
@@ -71,19 +72,19 @@ const AuraGarciaApp = () => {
 
   const divisions = [
     { id: 'transformacion', label: 'Transformación Digital', color: '#818CF8', tag: 'tag-transform' },
-    { id: 'eai', label: 'EAI — Agencia IA', color: '#A78BFA', tag: 'tag-eai' },
+    { id: 'eai', label: 'EAI · Agencia IA', color: '#A78BFA', tag: 'tag-eai' },
     { id: 'analytics', label: 'Analytics & Data', color: '#22D3EE', tag: 'tag-analytics' },
     { id: 'equipos-medicos', label: 'Equipos Médicos', color: '#34D399', tag: 'tag-medequip' },
     { id: 'marketing-salud', label: 'Marketing Digital', color: '#FBBF24', tag: 'tag-marketing' },
   ];
 
   const services = [
-    { title: 'Estrategia Digital en Salud', description: 'Diagnóstico integral y hoja de ruta personalizada para la transformación digital de tu institución.', timeframe: '4–6 sem', number: '01', icon: 'map-pin' },
-    { title: 'Datos Conectados', description: 'Integramos tus sistemas para que hablen entre sí, creando flujos de información fluidos entre departamentos.', timeframe: '6–8 sem', number: '02', icon: 'network' },
-    { title: 'Inteligencia Hospitalaria', description: 'Tableros que transforman datos en decisiones con KPIs ejecutivos y clínicos en tiempo real.', timeframe: '4–8 sem', number: '03', icon: 'bar-chart' },
-    { title: 'IA Médica Aplicada', description: 'Modelos predictivos para diagnóstico y gestión, con herramientas de IA validadas y operativas.', timeframe: '8–12 sem', number: '04', icon: 'brain' },
-    { title: 'Productos AuraGarcia', description: 'SALV.IA, MamRisk y CLARA: soluciones probadas, no prototipos. Tecnología adaptable a tus necesidades.', timeframe: '2–4 sem', number: '05', icon: 'package' },
-    { title: 'Transformación Organizacional', description: 'Formación y cambio cultural para adopción exitosa, con equipos capacitados y procesos optimizados.', timeframe: 'Continuo', number: '06', icon: 'users' },
+    { title: 'Estrategia Digital en Salud', description: 'Diagnóstico integral y hoja de ruta personalizada para la transformación digital de tu institución.', timeframe: '4-6 sem', icon: 'map-pin', featured: true },
+    { title: 'Datos Conectados', description: 'Integramos tus sistemas para que hablen entre sí, creando flujos de información fluidos entre departamentos.', timeframe: '6-8 sem', icon: 'network' },
+    { title: 'Inteligencia Hospitalaria', description: 'Tableros que transforman datos en decisiones con KPIs ejecutivos y clínicos en tiempo real.', timeframe: '4-8 sem', icon: 'bar-chart' },
+    { title: 'IA Médica Aplicada', description: 'Modelos predictivos para diagnóstico y gestión, con herramientas de IA validadas y operativas.', timeframe: '8-12 sem', icon: 'brain' },
+    { title: 'Productos AuraGarcia', description: 'SALV.IA, MamRisk y CLARA: soluciones probadas, no prototipos. Tecnología adaptable a tus necesidades.', timeframe: '2-4 sem', icon: 'package' },
+    { title: 'Transformación Organizacional', description: 'Formación y cambio cultural para adopción exitosa, con equipos capacitados y procesos optimizados.', timeframe: 'Continuo', icon: 'users' },
   ];
 
   const methodologySteps = [
@@ -96,7 +97,7 @@ const AuraGarciaApp = () => {
   const whyUs = [
     { title: 'Experiencia Clínica Real', description: 'Nuestro equipo combina expertise técnico con experiencia clínica directa. Entendemos los desafíos reales de los hospitales.', icon: 'heart-pulse' },
     { title: 'Productos Listos para Usar', description: 'SALV.IA, MamRisk y CLARA son soluciones probadas. Implementación inmediata con resultados medibles.', icon: 'rocket' },
-    { title: 'Metodología AURA Probada', description: 'Proceso estructurado de 4 fases que garantiza resultados. De la idea a valor clínico medible en 6–12 semanas.', icon: 'git-merge' },
+    { title: 'Metodología AURA Probada', description: 'Proceso estructurado de 4 fases que garantiza resultados. De la idea a valor clínico medible en semanas.', icon: 'git-merge' },
     { title: 'Compliance y Seguridad', description: 'Cumplimiento total con RGPD, ISO 27001 y normativas sanitarias. Seguridad de datos como prioridad absoluta.', icon: 'shield' },
     { title: 'Soporte Continuo', description: 'Acompañamiento post-implementación con formación, soporte técnico y optimización continua de resultados.', icon: 'headphones' },
     { title: 'ROI Medible', description: 'Retorno de inversión claro y medible. Reducción de costos operativos y mejora en calidad de atención documentada.', icon: 'trending-up' },
@@ -110,7 +111,7 @@ const AuraGarciaApp = () => {
   ];
 
   const analyticsServices = [
-    { title: 'Nearshore Data Teams', description: 'Senior data scientists and engineers embedded in your team — at 40–60% of US/EU cost, with full healthcare specialization.', icon: 'users' },
+    { title: 'Nearshore Data Teams', description: 'Senior data scientists and engineers embedded in your team — at 40-60% of US/EU cost, with full healthcare specialization.', icon: 'users' },
     { title: 'Healthcare BI & Dashboards', description: 'Real-time KPI dashboards for clinical and executive teams. HL7/FHIR-compatible, customized to your workflows.', icon: 'bar-chart' },
     { title: 'Data Engineering', description: 'End-to-end data pipelines: HL7, FHIR, interoperability, ETL processes, and cloud data warehouse architecture.', icon: 'database' },
     { title: 'Advanced Analytics', description: 'Predictive models, ML pipelines, and model ops for patient outcomes, readmission risk, and resource optimization.', icon: 'trending-up' },
@@ -140,17 +141,6 @@ const AuraGarciaApp = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const handler = () => {
-      const cardW = container.scrollWidth / services.length;
-      setActiveService(Math.round(container.scrollLeft / cardW));
-    };
-    container.addEventListener('scroll', handler, { passive: true });
-    return () => container.removeEventListener('scroll', handler);
-  }, [services.length]);
 
   useEffect(() => {
     const handler = () => {
@@ -197,6 +187,11 @@ const AuraGarciaApp = () => {
         .wr{animation:wave-rev 18s ease-in-out infinite}
         .s1{animation:sweep 1.5s ease-out forwards}
         .s2{animation:sweep2 1.5s ease-out forwards}
+        @media (prefers-reduced-motion: reduce) {
+          .wf, .wr { animation: none !important; }
+          .reveal-hidden { opacity: 1 !important; transform: none !important; transition: none !important; }
+          * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
       `}</style>
 
       {showAuraEffect && (
@@ -274,60 +269,87 @@ const AuraGarciaApp = () => {
         )}
       </header>
 
-      {/* HERO */}
+      {/* HERO — left-aligned, two-column with real image */}
       <section id="inicio" className="relative min-h-screen flex items-center px-4 md:px-8 pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 wf" style={{ background: dk ? 'linear-gradient(135deg,#000 0%,#0d0d1a 30%,#111128 60%,#050510 100%)' : 'linear-gradient(135deg,#EEF2FF 0%,#E0E7FF 40%,#F5F3FF 70%,#EFF6FF 100%)' }}></div>
           <div className="absolute inset-0 wr opacity-60" style={{ background: dk ? 'linear-gradient(45deg,#0d0d1a 0%,#111428 50%,#0f1535 100%)' : 'linear-gradient(45deg,#E0E7FF 0%,#EDE9FE 50%,#DBEAFE 100%)' }}></div>
           <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle,rgba(99,102,241,0.1) 0%,transparent 60%)', transform: 'translate(-50%,-50%)', animation: 'aura-drift 22s ease-in-out infinite', filter: 'blur(50px)' }}></div>
-          <div className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle,rgba(139,92,246,0.08) 0%,transparent 60%)', transform: 'translate(50%,50%)', animation: 'aura-float 18s ease-in-out infinite', filter: 'blur(40px)' }}></div>
-          <div className="absolute inset-0 opacity-[0.15]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }}></div>
+          <div className="absolute inset-0 opacity-[0.12]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }}></div>
         </div>
 
-        <div className="max-w-5xl mx-auto relative z-10 text-center px-4 w-full">
-          <div className="flex flex-wrap justify-center gap-2 mb-10 reveal-hidden">
-            {divisions.map(d => (
-              <a key={d.id} href={`#${d.id}`}
-                className="stat-pill text-xs transition-all duration-300 hover:scale-105"
-                style={{ background: `${d.color}18`, color: d.color, border: `1px solid ${d.color}30` }}>
-                {d.label}
+        <div className="max-w-7xl mx-auto relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center py-16">
+          {/* Left: content */}
+          <div>
+            <div className="flex flex-wrap gap-2 mb-8 reveal-hidden">
+              {divisions.map(d => (
+                <a key={d.id} href={`#${d.id}`}
+                  className="stat-pill text-xs transition-all duration-300 hover:scale-105"
+                  style={{ background: `${d.color}18`, color: d.color, border: `1px solid ${d.color}30` }}>
+                  {d.label}
+                </a>
+              ))}
+            </div>
+
+            <h1 className={`text-5xl md:text-6xl lg:text-7xl font-light leading-[1.0] mb-6 reveal-hidden delay-1 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+              Salud más<br /><span className="gradient-text-primary">inteligente</span>
+            </h1>
+
+            <p className={`text-lg md:text-xl leading-relaxed mb-10 max-w-lg font-light reveal-hidden delay-2 ${dk ? 'text-gray-300' : 'text-gray-600'}`}>
+              Cinco divisiones especializadas para transformar la salud digital: datos, IA, equipos, marketing y más.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mb-12 reveal-hidden delay-3">
+              <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
+                className="btn-gradient-primary px-8 py-4 rounded-full text-base font-light inline-flex items-center gap-2">
+                Conversemos <Icon name="arrow-right" size={18} color="white" />
               </a>
-            ))}
+              <a href="#transformacion"
+                className={`px-8 py-4 rounded-full text-base font-light inline-flex items-center gap-2 transition-all duration-300 ${dk ? 'border border-white/15 text-white hover:bg-white/5' : 'border border-gray-300 text-gray-700 hover:bg-gray-50'}`}>
+                Ver servicios
+              </a>
+            </div>
+
+            <div className="flex flex-wrap gap-4 reveal-hidden delay-4">
+              {[['40%','reducción diagnóstico'],['6 sem','implementación'],['50+','hospitales']].map(([v, l]) => (
+                <span key={l} className="stat-pill"
+                  style={{ background: dk ? 'rgba(255,255,255,0.06)' : 'rgba(99,102,241,0.08)', border: dk ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(99,102,241,0.15)', color: dk ? 'rgba(255,255,255,0.85)' : '#4338CA' }}>
+                  <strong style={{ color: '#818CF8', marginRight: '5px' }}>{v}</strong>{l}
+                </span>
+              ))}
+            </div>
           </div>
 
-          <h1 className={`text-5xl md:text-7xl lg:text-8xl font-light leading-[0.9] mb-6 reveal-hidden delay-1 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-            Salud más<br /><span className="gradient-text-primary">inteligente</span>
-          </h1>
-
-          <p className={`text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto font-light reveal-hidden delay-2 ${dk ? 'text-gray-300' : 'text-gray-600'}`}>
-            Cinco divisiones especializadas para transformar la salud digital: datos, IA, equipos, marketing y más.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3 mb-12 reveal-hidden delay-3">
-            {[['40%','reducción diagnóstico'],['95%','precisión IA'],['6 sem','implementación'],['50+','hospitales']].map(([v, l]) => (
-              <span key={l} className="stat-pill"
-                style={{ background: dk ? 'rgba(255,255,255,0.06)' : 'rgba(99,102,241,0.08)', border: dk ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(99,102,241,0.15)', color: dk ? 'rgba(255,255,255,0.85)' : '#4338CA' }}>
-                <strong style={{ color: '#818CF8', marginRight: '5px' }}>{v}</strong>{l}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-4 reveal-hidden delay-4">
-            <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
-              className="btn-gradient-primary px-10 py-4 rounded-full text-base font-light justify-center inline-flex items-center gap-2">
-              Conversemos <Icon name="arrow-right" size={18} color="white" />
-            </a>
-            <a href="#transformacion"
-              className={`px-10 py-4 rounded-full text-base font-light inline-flex items-center justify-center gap-2 transition-all duration-300 ${dk ? 'border border-white/15 text-white hover:bg-white/5' : 'border border-gray-300 text-gray-700 hover:bg-gray-50'}`}>
-              Ver servicios
-            </a>
-          </div>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-          <span className={`text-xs uppercase tracking-[0.3em] font-light ${dk ? 'text-gray-600' : 'text-gray-400'}`}>Descubre más</span>
-          <div className="w-px h-12 overflow-hidden relative">
-            <div className="absolute top-0 w-full bg-gradient-to-b from-indigo-400/60 to-transparent" style={{ height: `${Math.min(scrollProgress * 3, 100)}%` }}></div>
+          {/* Right: image panel */}
+          <div className="hidden lg:block reveal-hidden delay-2">
+            <div className="relative rounded-3xl overflow-hidden" style={{ aspectRatio: '4/5' }}>
+              <img
+                src="https://picsum.photos/seed/medtech2026/600/750"
+                alt="Healthcare technology"
+                className="w-full h-full object-cover"
+                loading="eager"
+              />
+              <div className="absolute inset-0" style={{ background: dk ? 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' : 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)' }}></div>
+              {/* Floating metric card */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="rounded-2xl p-4 backdrop-blur-md" style={{ background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-gray-400 mb-1">Hospitales activos</p>
+                      <p className="text-2xl font-light text-white">50+</p>
+                    </div>
+                    <div className="flex -space-x-2">
+                      {['#818CF8','#22D3EE','#34D399','#FBBF24'].map((c, i) => (
+                        <div key={i} className="w-8 h-8 rounded-full border-2 border-black/60 flex items-center justify-center text-xs font-medium"
+                          style={{ background: `${c}30`, color: c, borderColor: 'rgba(0,0,0,0.6)' }}>
+                          {['H','C','I','M'][i]}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -335,21 +357,53 @@ const AuraGarciaApp = () => {
       {/* DIV 1: TRANSFORMACIÓN DIGITAL */}
       <section id="transformacion" className="py-24 md:py-32 px-4 md:px-8" style={{ backgroundColor: dk ? '#050510' : '#FAFAFA' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 reveal-hidden">
+          <div className="mb-16 reveal-hidden">
             <span className="section-label tag-transform mb-5 inline-block">Transformación Digital en Salud</span>
-            <h2 className={`text-4xl md:text-6xl font-light leading-tight mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-              Servicios que mueven<br /><span className="gradient-text-primary">la aguja</span>
-            </h2>
-            <p className={`text-lg font-light max-w-xl mx-auto ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Paquetes claros, entregables medibles, impacto en semanas</p>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mt-5">
+              <h2 className={`text-4xl md:text-6xl font-light leading-tight ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+                Servicios que<br />mueven la aguja
+              </h2>
+              <p className={`text-base font-light max-w-xs md:text-right ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Paquetes claros, entregables medibles, impacto en semanas</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
-            {services.map((s, i) => (
-              <div key={i} className={`${dk ? 'card-glass-dark' : 'card-glass-light'} gradient-border-card p-7 reveal-hidden delay-${Math.min(i+1,6)}`}>
+          {/* Bento layout: featured card + regular cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+            {/* Featured card spans 2 cols */}
+            <div className={`md:col-span-2 ${dk ? 'card-glass-dark' : 'card-glass-light'} gradient-border-card p-8 reveal-hidden delay-1 relative overflow-hidden`}>
+              <div className="absolute right-0 top-0 bottom-0 w-1/3 hidden md:block" style={{ background: `url('https://picsum.photos/seed/hospital-strategy/300/400') center/cover no-repeat`, opacity: 0.12, filter: 'blur(2px)' }}></div>
+              <div className="relative z-10">
+                <div className="icon-box mb-6" style={{ background: 'rgba(99,102,241,0.12)' }}>
+                  <Icon name={services[0].icon} size={24} color="#818CF8" />
+                </div>
+                <h3 className={`text-2xl font-medium mb-3 leading-snug ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>{services[0].title}</h3>
+                <p className={`text-sm font-light leading-relaxed mb-6 max-w-sm ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{services[0].description}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium uppercase tracking-wider" style={{ color: '#818CF8' }}>{services[0].timeframe}</span>
+                  <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium transition-all duration-300 hover:gap-2.5" style={{ color: '#818CF8' }}>
+                    Solicitar <Icon name="arrow-right" size={12} color="#818CF8" />
+                  </a>
+                </div>
+              </div>
+            </div>
+            {/* Regular card */}
+            <div className={`${dk ? 'card-glass-dark' : 'card-glass-light'} gradient-border-card p-7 reveal-hidden delay-2`}>
+              <div className="icon-box mb-5" style={{ background: 'rgba(99,102,241,0.12)' }}>
+                <Icon name={services[1].icon} size={22} color="#818CF8" />
+              </div>
+              <h3 className={`text-base font-medium mb-2 leading-snug ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>{services[1].title}</h3>
+              <p className={`text-sm font-light leading-relaxed mb-4 ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{services[1].description}</p>
+              <span className="text-xs font-medium uppercase tracking-wider" style={{ color: '#818CF8' }}>{services[1].timeframe}</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+            {services.slice(2).map((s, i) => (
+              <div key={i} className={`${dk ? 'card-glass-dark' : 'card-glass-light'} gradient-border-card p-7 reveal-hidden delay-${i+1}`}>
                 <div className="icon-box mb-5" style={{ background: 'rgba(99,102,241,0.12)' }}>
                   <Icon name={s.icon} size={22} color="#818CF8" />
                 </div>
-                <div className={`text-5xl font-light mb-2 ${dk ? 'text-indigo-400/15' : 'text-indigo-100'}`}>{s.number}</div>
                 <h3 className={`text-base font-medium mb-2 leading-snug ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>{s.title}</h3>
                 <p className={`text-sm font-light leading-relaxed mb-4 ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{s.description}</p>
                 <span className="text-xs font-medium uppercase tracking-wider" style={{ color: '#818CF8' }}>{s.timeframe}</span>
@@ -372,15 +426,14 @@ const AuraGarciaApp = () => {
           <div className="absolute top-1/3 left-1/4 w-96 h-96 rounded-full" style={{ background: 'radial-gradient(circle,rgba(99,102,241,0.07) 0%,transparent 60%)', transform: 'translate(-50%,-50%)', animation: 'aura-drift 20s ease-in-out infinite', filter: 'blur(50px)' }}></div>
         </div>
         <div className="max-w-4xl mx-auto relative z-10">
-          <div className="text-center mb-20 reveal-hidden">
-            <span className="section-label tag-transform mb-5 inline-block">Metodología</span>
-            <h2 className={`text-4xl md:text-6xl font-light mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-              Metodología <span className="gradient-text-primary">AURA</span>
+          <div className="mb-20 reveal-hidden">
+            <h2 className={`text-4xl md:text-6xl font-light mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+              Metodología <span style={{ color: '#818CF8' }}>AURA</span>
             </h2>
             <p className={`text-lg font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>De la idea a valor clínico medible, sin ruido</p>
           </div>
 
-          <div className="relative max-w-2xl mx-auto">
+          <div className="relative max-w-2xl">
             <div className={`absolute left-8 md:left-10 top-0 bottom-0 w-px ${dk ? 'bg-white/8' : 'bg-gray-200'}`}></div>
             <div className="absolute left-8 md:left-10 top-0 w-px transition-all duration-300"
               style={{ height: `${methodologyLineProgress * 100}%`, background: 'linear-gradient(to bottom,#818CF8,#A78BFA)', boxShadow: '0 0 8px rgba(99,102,241,0.4)', opacity: methodologyLineProgress > 0 ? 1 : 0 }}></div>
@@ -407,25 +460,41 @@ const AuraGarciaApp = () => {
         </div>
       </section>
 
-      {/* POR QUÉ ELEGIRNOS */}
+      {/* POR QUÉ ELEGIRNOS — horizontal 2-col feature list */}
       <section id="por-que-elegirnos" className="py-24 md:py-32 px-4 md:px-8" style={{ backgroundColor: dk ? '#050510' : '#FFFFFF' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 reveal-hidden">
-            <span className="section-label tag-transform mb-5 inline-block">Por qué elegirnos</span>
-            <h2 className={`text-4xl md:text-6xl font-light mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-              Diferenciación que <span className="gradient-text-primary">importa</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {whyUs.map((item, i) => (
-              <div key={i} className={`${dk ? 'card-glass-dark' : 'card-glass-light'} gradient-border-card p-7 reveal-hidden delay-${Math.min(i+1,6)}`}>
-                <div className="icon-box mb-5" style={{ background: 'rgba(99,102,241,0.12)' }}>
-                  <Icon name={item.icon} size={22} color="#818CF8" />
-                </div>
-                <h3 className={`text-lg font-medium mb-3 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>{item.title}</h3>
-                <p className={`text-sm font-light leading-relaxed ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{item.description}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            {/* Left: sticky heading + image */}
+            <div className="reveal-hidden">
+              <h2 className={`text-4xl md:text-5xl font-light leading-tight mb-6 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+                Por qué trabajar<br />con nosotros
+              </h2>
+              <p className={`text-base font-light mb-10 ${dk ? 'text-gray-400' : 'text-gray-500'}`}>
+                No somos una consultora genérica. Vivimos en la intersección de la clínica y la tecnología desde hace años.
+              </p>
+              <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: '4/3' }}>
+                <img
+                  src="https://picsum.photos/seed/healthcare-team/500/375"
+                  alt="Healthcare team"
+                  className="w-full h-full object-cover"
+                />
               </div>
-            ))}
+            </div>
+
+            {/* Right: feature list */}
+            <div className="space-y-0">
+              {whyUs.map((item, i) => (
+                <div key={i} className={`flex items-start gap-5 py-6 reveal-hidden delay-${Math.min(i+1,6)} ${i < whyUs.length - 1 ? (dk ? 'border-b border-white/6' : 'border-b border-gray-100') : ''}`}>
+                  <div className="icon-box flex-shrink-0 mt-0.5" style={{ background: 'rgba(99,102,241,0.1)' }}>
+                    <Icon name={item.icon} size={20} color="#818CF8" />
+                  </div>
+                  <div>
+                    <h3 className={`text-base font-medium mb-1.5 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>{item.title}</h3>
+                    <p className={`text-sm font-light leading-relaxed ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -438,13 +507,13 @@ const AuraGarciaApp = () => {
           <div className="absolute top-1/2 right-1/4 w-80 h-80 rounded-full" style={{ background: 'radial-gradient(circle,rgba(139,92,246,0.08) 0%,transparent 60%)', transform: 'translate(50%,-50%)', animation: 'aura-breathe 14s ease-in-out infinite', filter: 'blur(50px)' }}></div>
         </div>
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-16 reveal-hidden">
-            <span className="section-label tag-eai mb-5 inline-block">EAI — Agencia de Inteligencia Artificial</span>
+          <div className="mb-16 reveal-hidden">
+            <span className="section-label tag-eai mb-5 inline-block">EAI · Agencia de Inteligencia Artificial</span>
             <h2 className={`text-4xl md:text-6xl font-light mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
               IA que trabaja<br />
-              <span style={{ background: 'linear-gradient(135deg,#A78BFA,#7C3AED)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>para tu clínica</span>
+              <span style={{ color: '#A78BFA' }}>para tu clínica</span>
             </h2>
-            <p className={`text-lg font-light max-w-xl mx-auto ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Agentes, automatización y LLMs especializados en el dominio de la salud</p>
+            <p className={`text-lg font-light max-w-xl ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Agentes, automatización y LLMs especializados en el dominio de la salud</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
@@ -472,7 +541,7 @@ const AuraGarciaApp = () => {
             </div>
           </div>
 
-          <div className="flex justify-center reveal-hidden">
+          <div className="flex justify-start reveal-hidden">
             <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-light transition-all duration-300 hover:scale-105"
               style={{ background: 'linear-gradient(135deg,#7C3AED,#6D28D9)', color: 'white', boxShadow: '0 0 20px rgba(124,58,237,0.35)' }}>
@@ -490,17 +559,19 @@ const AuraGarciaApp = () => {
           <div className="absolute top-1/2 left-1/3 w-96 h-96 rounded-full" style={{ background: 'radial-gradient(circle,rgba(6,182,212,0.07) 0%,transparent 60%)', transform: 'translate(-50%,-50%)', animation: 'aura-drift 22s ease-in-out infinite', filter: 'blur(50px)' }}></div>
         </div>
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-16 reveal-hidden">
+          <div className="mb-16 reveal-hidden">
             <span className="section-label tag-analytics mb-5 inline-block">Analytics &amp; Data Teams</span>
-            <h2 className={`text-4xl md:text-6xl font-light mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-              World-class data teams,<br />
-              <span style={{ background: 'linear-gradient(135deg,#22D3EE,#0891B2)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>nearshored for healthcare</span>
-            </h2>
-            <p className={`text-lg font-light max-w-2xl mx-auto ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Senior healthcare data scientists and engineers embedded in your team — at 40–60% of US/EU rates.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end mt-5">
+              <h2 className={`text-4xl md:text-5xl font-light ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+                World-class data teams,{' '}
+                <span style={{ color: '#22D3EE' }}>nearshored for healthcare</span>
+              </h2>
+              <p className={`text-base font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Senior healthcare data scientists and engineers embedded in your team at 40-60% of US/EU rates.</p>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 reveal-hidden">
-            {[['40–60%','Cost savings vs US/EU'],['Healthcare','Domain specialized'],['Agile','Fast deployment'],['Bilingual','English + Spanish']].map(([v, l]) => (
+            {[['40-60%','Cost savings vs US/EU'],['Healthcare','Domain specialized'],['Agile','Fast deployment'],['Bilingual','English + Spanish']].map(([v, l]) => (
               <div key={l} className="text-center p-5 rounded-2xl" style={{ background: dk ? 'rgba(6,182,212,0.08)' : 'rgba(6,182,212,0.06)', border: dk ? '1px solid rgba(6,182,212,0.18)' : '1px solid rgba(6,182,212,0.14)' }}>
                 <div className="text-lg font-medium mb-1" style={{ color: '#22D3EE' }}>{v}</div>
                 <div className={`text-xs font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{l}</div>
@@ -521,7 +592,7 @@ const AuraGarciaApp = () => {
             ))}
           </div>
 
-          <div className="flex justify-center reveal-hidden">
+          <div className="flex justify-start reveal-hidden">
             <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-light transition-all duration-300 hover:scale-105"
               style={{ background: 'linear-gradient(135deg,#0891B2,#0E7490)', color: 'white', boxShadow: '0 0 20px rgba(8,145,178,0.35)' }}>
@@ -539,16 +610,35 @@ const AuraGarciaApp = () => {
           <div className="absolute bottom-1/3 right-1/3 w-80 h-80 rounded-full" style={{ background: 'radial-gradient(circle,rgba(16,185,129,0.07) 0%,transparent 60%)', transform: 'translate(50%,50%)', animation: 'aura-breathe 16s ease-in-out infinite', filter: 'blur(50px)' }}></div>
         </div>
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-16 reveal-hidden">
-            <span className="section-label tag-medequip mb-5 inline-block">Importación de Equipos Médicos</span>
-            <h2 className={`text-4xl md:text-6xl font-light mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-              Tecnología médica<br />
-              <span style={{ background: 'linear-gradient(135deg,#34D399,#059669)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>de vanguardia</span>
-            </h2>
-            <p className={`text-lg font-light max-w-xl mx-auto ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Importación directa de equipos médicos de primera línea a precios competitivos, con soporte completo</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+            <div className="reveal-hidden">
+              <span className="section-label tag-medequip mb-5 inline-block">Importación de Equipos Médicos</span>
+              <h2 className={`text-4xl md:text-5xl font-light mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+                Tecnología médica<br />
+                <span style={{ color: '#34D399' }}>de vanguardia</span>
+              </h2>
+              <p className={`text-base font-light mb-8 ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Importación directa de equipos médicos de primera línea a precios competitivos, con soporte completo</p>
+              <div className="flex flex-wrap gap-3">
+                {['Precios competitivos','Garantía y soporte técnico','Importación directa','Formación del personal','Entrega rápida'].map(item => (
+                  <span key={item} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
+                    style={{ background: dk ? 'rgba(16,185,129,0.1)' : 'rgba(16,185,129,0.07)', color: dk ? '#34D399' : '#065F46' }}>
+                    <Icon name="check" size={10} color={dk ? '#34D399' : '#059669'} />{item}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="hidden lg:block reveal-hidden delay-1">
+              <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: '1/1' }}>
+                <img
+                  src="https://picsum.photos/seed/medical-equipment/500/500"
+                  alt="Medical equipment"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
             {medEquipServices.map((s, i) => (
               <div key={i} className={`p-7 rounded-2xl reveal-hidden delay-${i+1}`}
                 style={{ background: dk ? 'rgba(16,185,129,0.05)' : 'rgba(16,185,129,0.04)', border: dk ? '1px solid rgba(16,185,129,0.18)' : '1px solid rgba(16,185,129,0.14)' }}>
@@ -561,16 +651,7 @@ const AuraGarciaApp = () => {
             ))}
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3 mb-10 reveal-hidden">
-            {['Precios competitivos','Garantía y soporte técnico','Importación directa','Formación del personal','Entrega rápida'].map(item => (
-              <span key={item} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm"
-                style={{ background: dk ? 'rgba(16,185,129,0.1)' : 'rgba(16,185,129,0.07)', color: dk ? '#34D399' : '#065F46' }}>
-                <Icon name="check" size={12} color={dk ? '#34D399' : '#059669'} />{item}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex justify-center reveal-hidden">
+          <div className="flex justify-start reveal-hidden">
             <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-light transition-all duration-300 hover:scale-105"
               style={{ background: 'linear-gradient(135deg,#059669,#047857)', color: 'white', boxShadow: '0 0 20px rgba(5,150,105,0.35)' }}>
@@ -588,13 +669,13 @@ const AuraGarciaApp = () => {
           <div className="absolute top-1/3 right-1/3 w-80 h-80 rounded-full" style={{ background: 'radial-gradient(circle,rgba(245,158,11,0.07) 0%,transparent 60%)', transform: 'translate(50%,-50%)', animation: 'aura-drift 18s ease-in-out infinite', filter: 'blur(50px)' }}></div>
         </div>
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-16 reveal-hidden">
+          <div className="mb-16 reveal-hidden">
             <span className="section-label tag-marketing mb-5 inline-block">Marketing Digital para Salud</span>
             <h2 className={`text-4xl md:text-6xl font-light mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
               Visibilidad digital para<br />
-              <span style={{ background: 'linear-gradient(135deg,#FBBF24,#D97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>profesionales de la salud</span>
+              <span style={{ color: '#FBBF24' }}>profesionales de la salud</span>
             </h2>
-            <p className={`text-lg font-light max-w-xl mx-auto ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Marketing especializado en el sector sanitario con conocimiento clínico real y cumplimiento normativo</p>
+            <p className={`text-lg font-light max-w-xl ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Marketing especializado en el sector sanitario con conocimiento clínico real y cumplimiento normativo</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
@@ -610,7 +691,7 @@ const AuraGarciaApp = () => {
             ))}
           </div>
 
-          <div className="flex justify-center reveal-hidden">
+          <div className="flex justify-start reveal-hidden">
             <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-light transition-all duration-300 hover:scale-105"
               style={{ background: 'linear-gradient(135deg,#D97706,#B45309)', color: 'white', boxShadow: '0 0 20px rgba(217,119,6,0.35)' }}>
@@ -625,19 +706,18 @@ const AuraGarciaApp = () => {
       {/* TESTIMONIOS */}
       <section id="testimonios" className="py-24 md:py-32 px-4 md:px-8" style={{ backgroundColor: dk ? '#050510' : '#FAFAFA' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 reveal-hidden">
-            <span className="section-label tag-transform mb-5 inline-block">Testimonios</span>
-            <h2 className={`text-4xl md:text-6xl font-light mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-              Resultados que <span className="gradient-text-primary">hablan</span>
+          <div className="mb-16 reveal-hidden">
+            <h2 className={`text-4xl md:text-6xl font-light mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+              Resultados que hablan
             </h2>
             <p className={`text-lg font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Hospitales que transformaron su operación con nuestra metodología</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {[
-              { metric: '40%', quote: 'Reducción en tiempo de diagnóstico con SALV.IA. Nuestros cardiólogos identifican arritmias complejas en segundos.', name: 'Dra. María González', role: 'Jefa de Cardiología, Hospital Madrid', initials: 'MG' },
-              { metric: '6 sem', quote: 'De la idea a implementación. AuraGarcia conectó todos nuestros sistemas en tiempo récord con resultados desde el primer día.', name: 'Carlos Ruiz', role: 'CTO, Clínica Barcelona', initials: 'CR' },
-              { metric: '85%', quote: 'Mejora en precisión de detección de cáncer de mama. MamRisk ha revolucionado nuestro programa de screening.', name: 'Dra. Ana Martín', role: 'Radióloga, Hospital Valencia', initials: 'AM' },
+              { metric: '40%', quote: 'Reducción en tiempo de diagnóstico con SALV.IA. Nuestros cardiólogos identifican arritmias complejas en segundos.', role: 'Jefa de Cardiología, Hospital Madrid', initials: 'MG' },
+              { metric: '6 sem', quote: 'De la idea a implementación. AuraGarcia conectó todos nuestros sistemas en tiempo récord con resultados desde el primer día.', role: 'CTO, Clínica Barcelona', initials: 'CR' },
+              { metric: '85%', quote: 'Mejora en precisión de detección. MamRisk ha revolucionado nuestro programa de screening.', role: 'Radióloga, Hospital Valencia', initials: 'AM' },
             ].map((t, i) => (
               <div key={i} className={`${dk ? 'card-glass-dark' : 'card-glass-light'} p-8 rounded-2xl reveal-hidden delay-${i+1} relative overflow-hidden`}>
                 <div className={`quote-mark absolute top-2 right-5 ${dk ? 'text-white' : 'text-gray-900'}`}>"</div>
@@ -648,15 +728,12 @@ const AuraGarciaApp = () => {
                     </svg>
                   ))}
                 </div>
-                <div className="text-3xl font-light mb-3 gradient-text-primary">{t.metric}</div>
+                <div className="text-3xl font-light mb-3" style={{ color: '#818CF8' }}>{t.metric}</div>
                 <p className={`text-sm font-light leading-relaxed mb-6 ${dk ? 'text-gray-300' : 'text-gray-600'}`}>"{t.quote}"</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', color: 'white' }}>{t.initials}</div>
-                  <div>
-                    <p className={`text-sm font-medium ${dk ? 'text-white' : 'text-gray-900'}`}>{t.name}</p>
-                    <p className={`text-xs font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{t.role}</p>
-                  </div>
+                    style={{ background: 'rgba(99,102,241,0.2)', color: '#818CF8', border: '1px solid rgba(99,102,241,0.3)' }}>{t.initials}</div>
+                  <p className={`text-xs font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{t.role}</p>
                 </div>
               </div>
             ))}
@@ -667,7 +744,7 @@ const AuraGarciaApp = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[['50+','Hospitales Transformados'],['3M+','Pacientes Impactados'],['6','Años de Experiencia'],['98%','Satisfacción Cliente']].map(([v, l]) => (
                 <div key={l}>
-                  <div className="text-3xl md:text-4xl font-light mb-2 gradient-text-primary">{v}</div>
+                  <div className="text-3xl md:text-4xl font-light mb-2" style={{ color: '#818CF8' }}>{v}</div>
                   <p className={`text-sm font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{l}</p>
                 </div>
               ))}
@@ -679,11 +756,11 @@ const AuraGarciaApp = () => {
       {/* CONTACTO */}
       <section id="contacto" className="py-24 md:py-32 px-4 md:px-8" style={{ backgroundColor: dk ? '#080818' : '#F5F5FF' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 reveal-hidden">
-            <span className="section-label tag-transform mb-5 inline-block">Contacto</span>
-            <h2 className={`text-4xl md:text-6xl font-light mt-5 mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-              Conversemos sobre<br /><span className="gradient-text-primary">tu proyecto</span>
+          <div className="mb-16 reveal-hidden">
+            <h2 className={`text-4xl md:text-6xl font-light mb-4 ${dk ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+              Conversemos sobre<br /><span style={{ color: '#818CF8' }}>tu proyecto</span>
             </h2>
+            <p className={`text-lg font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>Primera consulta gratuita, sin compromisos</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 reveal-hidden">
@@ -697,17 +774,17 @@ const AuraGarciaApp = () => {
                   </div>
                   <div>
                     <label className={`block text-sm font-light mb-2 ${dk ? 'text-gray-300' : 'text-gray-700'}`}>Tu nombre *</label>
-                    <input type="text" placeholder="Dr. María González" className={`input-modern w-full px-4 py-3 rounded-xl text-sm font-light ${dk ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
+                    <input type="text" placeholder="Dr. García" className={`input-modern w-full px-4 py-3 rounded-xl text-sm font-light ${dk ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
                     <label className={`block text-sm font-light mb-2 ${dk ? 'text-gray-300' : 'text-gray-700'}`}>Email *</label>
-                    <input type="email" placeholder="maria@hospital.com" className={`input-modern w-full px-4 py-3 rounded-xl text-sm font-light ${dk ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
+                    <input type="email" placeholder="tu@hospital.com" className={`input-modern w-full px-4 py-3 rounded-xl text-sm font-light ${dk ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
                   </div>
                   <div>
                     <label className={`block text-sm font-light mb-2 ${dk ? 'text-gray-300' : 'text-gray-700'}`}>Teléfono</label>
-                    <input type="tel" placeholder="+34 600 123 456" className={`input-modern w-full px-4 py-3 rounded-xl text-sm font-light ${dk ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
+                    <input type="tel" placeholder="+34 600 000 000" className={`input-modern w-full px-4 py-3 rounded-xl text-sm font-light ${dk ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
                   </div>
                 </div>
                 <div>
@@ -722,7 +799,7 @@ const AuraGarciaApp = () => {
                   <label className={`block text-sm font-light mb-2 ${dk ? 'text-gray-300' : 'text-gray-700'}`}>¿En qué podemos ayudarte? *</label>
                   <textarea rows={4} placeholder="Cuéntanos sobre tu proyecto, desafíos actuales, timeline esperado..." className={`input-modern w-full px-4 py-3 rounded-xl text-sm font-light resize-none ${dk ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400'}`}></textarea>
                 </div>
-                <button type="submit" className="w-full btn-gradient-primary py-4 rounded-xl text-sm font-medium justify-center">
+                <button type="submit" className="w-full btn-gradient-primary py-4 rounded-xl text-sm font-medium justify-center inline-flex items-center gap-2">
                   Enviar mensaje <Icon name="arrow-right" size={16} color="white" />
                 </button>
                 <p className={`text-xs font-light text-center ${dk ? 'text-gray-600' : 'text-gray-400'}`}>Al enviar aceptas nuestra política de privacidad. No compartimos tu información.</p>
@@ -773,22 +850,23 @@ const AuraGarciaApp = () => {
       </section>
 
       {/* PRE-FOOTER CTA */}
-      <section className="cta-strip py-24 md:py-32 px-4 md:px-8 text-center">
-        <div className="max-w-3xl mx-auto reveal-hidden">
-          <span className="section-label tag-transform mb-8 inline-block">¿Listo para empezar?</span>
-          <h2 className="text-4xl md:text-6xl font-light mt-6 mb-6 gradient-text-primary" style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-            Transforma tu hospital<br />en semanas, no años
-          </h2>
-          <p className="text-gray-400 text-lg font-light mb-10 max-w-xl mx-auto">
-            Primera consulta gratuita. Resultados medibles en 6 semanas. Sin compromisos.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+      <section className="cta-strip py-24 md:py-32 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal-hidden">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-light text-white leading-tight mb-6" style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+              Transforma tu hospital<br />en semanas, no años
+            </h2>
+            <p className="text-gray-400 text-base font-light max-w-sm">
+              Primera consulta gratuita. Resultados medibles en 6 semanas. Sin compromisos.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row lg:justify-end gap-4">
             <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
-              className="btn-gradient-primary px-10 py-4 rounded-full text-base font-light justify-center inline-flex items-center gap-2">
-              Agenda tu llamada gratuita <Icon name="arrow-right" size={18} color="white" />
+              className="btn-gradient-primary px-8 py-4 rounded-full text-base font-light inline-flex items-center gap-2">
+              Agenda tu llamada <Icon name="arrow-right" size={18} color="white" />
             </a>
             <a href="#contacto"
-              className="px-10 py-4 rounded-full text-base font-light inline-flex items-center justify-center gap-2 border border-white/15 text-white hover:bg-white/5 transition-all duration-300">
+              className="px-8 py-4 rounded-full text-base font-light inline-flex items-center justify-center gap-2 border border-white/15 text-white hover:bg-white/5 transition-all duration-300">
               Enviar mensaje
             </a>
           </div>
