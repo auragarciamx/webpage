@@ -43,6 +43,47 @@ const Icon = memo(({ name, size = 24, color = 'currentColor', className = '' }) 
   );
 });
 
+// === ECG: latido animado, firma visual de salud ===
+const EcgLine = ({ color = '#818CF8', className = '' }) => (
+  <svg viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true" className={`block w-full h-10 ${className}`}>
+    <path className="ecg-path" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+      d="M0,30 L150,30 L168,30 L178,14 L188,46 L198,6 L208,44 L218,30 L240,30 L390,30 L408,30 L418,18 L428,42 L438,10 L448,40 L458,30 L480,30 L600,30" />
+  </svg>
+);
+
+// === Contador animado al entrar en viewport ===
+const CountUp = ({ end, suffix = '', duration = 1600 }) => {
+  const ref = useRef(null);
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      obs.disconnect();
+      const t0 = performance.now();
+      const tick = now => {
+        const p = Math.min((now - t0) / duration, 1);
+        setVal(Math.round(end * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.4 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [end, duration]);
+  return <span ref={ref}>{val}{suffix}</span>;
+};
+
+// === Divisor ondulado orgánico entre secciones ===
+const WaveDivider = ({ from, to }) => (
+  <div aria-hidden="true" style={{ backgroundColor: from, lineHeight: 0 }}>
+    <svg viewBox="0 0 1440 64" preserveAspectRatio="none" className="block w-full h-10 md:h-16">
+      <path d="M0,32 C240,62 480,2 720,26 C960,50 1200,10 1440,34 L1440,64 L0,64 Z" fill={to} />
+    </svg>
+  </div>
+);
+
 // === MAIN APP ===
 const AuraGarciaApp = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -103,10 +144,10 @@ const AuraGarciaApp = () => {
   ];
 
   const analyticsServices = [
-    { title: 'Nearshore Data Teams',        description: 'Senior data scientists in your team. Healthcare-native. 40-60% of US/EU rates.',                   icon: 'users' },
-    { title: 'Healthcare BI & Dashboards',  description: 'Real-time dashboards for clinical and exec teams. HL7/FHIR-ready.',                                icon: 'bar-chart' },
-    { title: 'Data Engineering',            description: 'HL7, FHIR, ETL and cloud data warehouse. End-to-end.',                                             icon: 'database' },
-    { title: 'Advanced Analytics',          description: 'Predictive models for outcomes, readmissions, and resource use.',                                   icon: 'trending-up' },
+    { title: 'Equipos de Datos Nearshore',  description: 'Data scientists senior en tu equipo. Especializados en salud. 40-60% del coste US/EU.',           icon: 'users' },
+    { title: 'BI & Dashboards de Salud',    description: 'Dashboards en tiempo real para equipos clínicos y directivos. Compatibles HL7/FHIR.',              icon: 'bar-chart' },
+    { title: 'Ingeniería de Datos',         description: 'HL7, FHIR, ETL y data warehouse en la nube. De punta a punta.',                                    icon: 'database' },
+    { title: 'Analítica Avanzada',          description: 'Modelos predictivos de resultados, reingresos y uso de recursos.',                                  icon: 'trending-up' },
   ];
 
   const medEquipServices = [
@@ -114,6 +155,12 @@ const AuraGarciaApp = () => {
     { title: 'Equipamiento de UCI',     description: 'Monitores, ventiladores y desfibriladores. Garantía y soporte incluidos.',        icon: 'activity' },
     { title: 'Tecnología Quirúrgica',   description: 'Laparoscopia, instrumental quirúrgico e iluminación de alto rendimiento.',        icon: 'layers' },
     { title: 'Equipos de Laboratorio',  description: 'Hematología, PCR y microbiología. Formación del personal incluida.',              icon: 'cpu' },
+  ];
+
+  const products = [
+    { name: 'SALV.IA',  tagline: 'Detección de arritmias en ECG en segundos.',          tag: 'Cardiología',  icon: 'heart-pulse', color: '#818CF8' },
+    { name: 'MamRisk',  tagline: 'Estratificación de riesgo en screening de mama.',      tag: 'Radiología',   icon: 'scan',        color: '#A78BFA' },
+    { name: 'CLARA',    tagline: 'Documentación clínica asistida por IA.',               tag: 'Asistente IA', icon: 'sparkles',    color: '#22D3EE' },
   ];
 
   const marketingServices = [
@@ -179,11 +226,16 @@ const AuraGarciaApp = () => {
         .s1 { animation: sweep  1.5s ease-out forwards }
         .s2 { animation: sweep2 1.5s ease-out forwards }
         .card-hover { transition: all 0.35s cubic-bezier(0.4,0,0.2,1); }
-        .card-hover:hover { transform: translateY(-3px); }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 40px -16px rgba(99,102,241,0.3); }
         .list-item-hover { transition: background 0.2s ease; }
         .list-item-hover:hover { background: rgba(255,255,255,0.03) !important; }
+        .ecg-path { stroke-dasharray: 760; stroke-dashoffset: 760; animation: ecg-draw 4s linear infinite; }
+        @keyframes ecg-draw { 0%{stroke-dashoffset:760} 55%{stroke-dashoffset:0} 100%{stroke-dashoffset:-760} }
+        .marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+        .marquee-track:hover { animation-play-state: paused; }
+        @keyframes marquee { to { transform: translateX(-50%); } }
         @media (prefers-reduced-motion: reduce) {
-          .wf, .wr { animation: none !important; }
+          .wf, .wr, .ecg-path, .marquee-track { animation: none !important; }
           .reveal-hidden { opacity: 1 !important; transform: none !important; transition: none !important; }
           * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
@@ -297,9 +349,13 @@ const AuraGarciaApp = () => {
               <span className="gradient-text-primary" style={{ paddingBottom: '0.1em', display: 'inline-block' }}>inteligente</span>
             </h1>
 
-            <p className={`text-lg md:text-xl leading-relaxed mb-10 max-w-lg font-light reveal-hidden delay-2 ${dk ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`text-lg md:text-xl leading-relaxed mb-6 max-w-lg font-light reveal-hidden delay-2 ${dk ? 'text-gray-300' : 'text-gray-600'}`}>
               Todo lo que necesitas para liderar la salud digital, en una sola empresa.
             </p>
+
+            <div className="max-w-md mb-8 reveal-hidden delay-2" style={{ opacity: 0.7 }}>
+              <EcgLine color={dk ? '#818CF8' : '#6366F1'} />
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12 reveal-hidden delay-3">
               <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
@@ -352,6 +408,23 @@ const AuraGarciaApp = () => {
         </div>
       </section>
 
+      {/* ── MARQUEE — divisiones en movimiento ── */}
+      <div className={`py-5 overflow-hidden ${dk ? 'border-y border-white/5 bg-black' : 'border-y border-gray-100 bg-white'}`} aria-hidden="true">
+        <div className="marquee-track items-center gap-0">
+          {[...Array(2)].map((_, dup) => (
+            <div key={dup} className="flex items-center">
+              {divisions.map(d => (
+                <span key={`${dup}-${d.id}`} className="flex items-center gap-3 px-8 text-sm uppercase tracking-[0.3em] whitespace-nowrap font-light"
+                  style={{ color: d.color }}>
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: d.color }} />
+                  {d.label}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── DIV 1: TRANSFORMACIÓN DIGITAL ── */}
       <section id="transformacion" className="py-24 md:py-32 px-4 md:px-8" style={{ backgroundColor: dk ? '#050510' : '#FAFAFA' }}>
         <div className="max-w-6xl mx-auto">
@@ -363,7 +436,7 @@ const AuraGarciaApp = () => {
                 Servicios que<br />mueven la aguja
               </h2>
               <p className={`text-sm font-light max-w-xs md:text-right ${dk ? 'text-gray-400' : 'text-gray-500'}`}>
-                Paquetes claros, entregables medibles, impacto en semanas
+                Impacto medible en semanas
               </p>
             </div>
           </div>
@@ -401,16 +474,20 @@ const AuraGarciaApp = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
             {services.slice(2).map((s, i) => (
               <div key={i} className={`${dk ? 'card-glass-dark' : 'card-glass-light'} gradient-border-card p-7 reveal-hidden delay-${i+1} card-hover`}>
-                <div className="icon-box mb-5" style={{ background: 'rgba(99,102,241,0.12)' }}>
-                  <Icon name={s.icon} size={22} color="#818CF8" />
+                <div className="flex items-start gap-4">
+                  <div className="icon-box flex-shrink-0" style={{ background: 'rgba(99,102,241,0.12)' }}>
+                    <Icon name={s.icon} size={22} color="#818CF8" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`text-base font-medium mb-1.5 ${dk ? 'text-white' : 'text-gray-900'}`}
+                      style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>{s.title}</h3>
+                    <p className={`text-sm font-light leading-relaxed mb-3 ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{s.description}</p>
+                    <span className="text-xs font-medium uppercase tracking-wider" style={{ color: '#818CF8' }}>{s.timeframe}</span>
+                  </div>
                 </div>
-                <h3 className={`text-base font-medium mb-2 ${dk ? 'text-white' : 'text-gray-900'}`}
-                  style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>{s.title}</h3>
-                <p className={`text-sm font-light leading-relaxed mb-4 ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{s.description}</p>
-                <span className="text-xs font-medium uppercase tracking-wider" style={{ color: '#818CF8' }}>{s.timeframe}</span>
               </div>
             ))}
           </div>
@@ -446,7 +523,7 @@ const AuraGarciaApp = () => {
 
             {methodologySteps.map((step, i) => (
               <div key={i} data-step={i}
-                className={`relative flex items-start mb-16 transition-all duration-700 ${i <= activeMethodologyStep ? 'opacity-100 translate-y-0' : 'opacity-25 translate-y-4'}`}>
+                className={`relative flex items-start mb-12 transition-all duration-700 ${i <= activeMethodologyStep ? 'opacity-100 translate-y-0' : 'opacity-50 translate-y-4'}`}>
                 <div className={`relative z-10 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-2xl font-light flex-shrink-0 transition-all duration-700 ${i <= activeMethodologyStep ? (dk ? 'border border-indigo-400/40 text-white' : 'bg-white border border-indigo-200 text-indigo-700 shadow-lg') : (dk ? 'bg-white/4 border border-white/8 text-gray-600' : 'bg-gray-100 border border-gray-200 text-gray-400')}`}
                   style={{ fontFamily: 'Nortica, Girot, sans-serif', ...(i <= activeMethodologyStep && { background: dk ? 'linear-gradient(135deg,rgba(99,102,241,0.2),rgba(139,92,246,0.15))' : 'white' }) }}>
                   {step.letter}
@@ -462,6 +539,38 @@ const AuraGarciaApp = () => {
                     {step.result}
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PRODUCTOS PROPIOS ── */}
+      <section id="productos" className="py-20 md:py-24 px-4 md:px-8" style={{ backgroundColor: dk ? '#050510' : '#FAFAFA' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 reveal-hidden">
+            <h2 className={`text-3xl md:text-4xl font-light ${dk ? 'text-white' : 'text-gray-900'}`}
+              style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+              Productos propios, <span style={{ color: '#818CF8' }}>listos hoy</span>
+            </h2>
+            <p className={`text-sm font-light max-w-xs md:text-right ${dk ? 'text-gray-400' : 'text-gray-500'}`}>
+              Desarrollados y validados en hospitales reales
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {products.map((p, i) => (
+              <div key={p.name} className={`p-7 rounded-2xl reveal-hidden delay-${i+1} card-hover`}
+                style={{ background: dk ? `${p.color}0D` : `${p.color}0A`, border: `1px solid ${p.color}${dk ? '2E' : '24'}` }}>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="icon-box" style={{ background: `${p.color}1F` }}>
+                    <Icon name={p.icon} size={22} color={p.color} />
+                  </div>
+                  <span className="text-xs px-3 py-1 rounded-full" style={{ background: `${p.color}1A`, color: p.color }}>{p.tag}</span>
+                </div>
+                <h3 className={`text-xl font-medium mb-2 ${dk ? 'text-white' : 'text-gray-900'}`}
+                  style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>{p.name}</h3>
+                <p className={`text-sm font-light leading-relaxed ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{p.tagline}</p>
               </div>
             ))}
           </div>
@@ -504,7 +613,7 @@ const AuraGarciaApp = () => {
         </div>
       </section>
 
-      <div className="division-divider" />
+      <WaveDivider from={dk ? '#050510' : '#FFFFFF'} to={dk ? '#080814' : '#F8F6FF'} />
 
       {/* ── DIV 2: EAI — feature spotlight layout ── */}
       <section id="eai" className="py-24 md:py-32 px-4 md:px-8 relative overflow-hidden" style={{ backgroundColor: dk ? '#080814' : '#F8F6FF' }}>
@@ -548,7 +657,7 @@ const AuraGarciaApp = () => {
             {/* 3 smaller cards stacked */}
             <div className="flex flex-col gap-5">
               {eaiServices.slice(1).map((s, i) => (
-                <div key={i} className="flex-1 p-5 rounded-2xl reveal-hidden delay-${i+2} card-hover"
+                <div key={i} className={`flex-1 p-5 rounded-2xl reveal-hidden delay-${i+2} card-hover`}
                   style={{ background: dk ? 'rgba(139,92,246,0.05)' : 'rgba(139,92,246,0.03)', border: dk ? '1px solid rgba(139,92,246,0.16)' : '1px solid rgba(139,92,246,0.12)' }}>
                   <div className="flex items-start gap-3">
                     <div className="icon-box flex-shrink-0" style={{ background: 'rgba(139,92,246,0.14)', width: 36, height: 36 }}>
@@ -574,7 +683,7 @@ const AuraGarciaApp = () => {
         </div>
       </section>
 
-      <div className="division-divider" />
+      <WaveDivider from={dk ? '#080814' : '#F8F6FF'} to={dk ? '#040514' : '#F0FDFE'} />
 
       {/* ── DIV 3: ANALYTICS & DATA — horizontal list layout ── */}
       <section id="analytics" className="py-24 md:py-32 px-4 md:px-8 relative overflow-hidden" style={{ backgroundColor: dk ? '#040514' : '#F0FDFE' }}>
@@ -587,18 +696,18 @@ const AuraGarciaApp = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
               <h2 className={`text-4xl md:text-5xl font-light ${dk ? 'text-white' : 'text-gray-900'}`}
                 style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
-                World-class data,{' '}
-                <span style={{ color: '#22D3EE' }}>nearshored for healthcare</span>
+                Datos de clase mundial,{' '}
+                <span style={{ color: '#22D3EE' }}>nearshore para salud</span>
               </h2>
               <p className={`text-base font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>
-                Senior data scientists in your team. Healthcare-native. 40-60% of US/EU rates.
+                Data scientists senior en tu equipo, al 40-60% del coste US/EU.
               </p>
             </div>
           </div>
 
           {/* Big stats strip */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 reveal-hidden">
-            {[['40-60%','Cost savings vs US/EU'],['Healthcare','Domain specialized'],['Agile','Fast deployment'],['Bilingual','EN + ES']].map(([v, l]) => (
+            {[['40-60%','Ahorro vs US/EU'],['Salud','Especialización total'],['Ágil','Despliegue rápido'],['Bilingüe','EN + ES']].map(([v, l]) => (
               <div key={l} className="p-5 rounded-2xl text-center"
                 style={{ background: dk ? 'rgba(6,182,212,0.08)' : 'rgba(6,182,212,0.06)', border: dk ? '1px solid rgba(6,182,212,0.18)' : '1px solid rgba(6,182,212,0.14)' }}>
                 <div className="text-lg font-medium mb-1" style={{ color: '#22D3EE' }}>{v}</div>
@@ -629,13 +738,13 @@ const AuraGarciaApp = () => {
             <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-light transition-all hover:scale-105"
               style={{ background: 'linear-gradient(135deg,#0891B2,#0E7490)', color: 'white', boxShadow: '0 0 20px rgba(8,145,178,0.3)' }}>
-              Build your data team <Icon name="arrow-right" size={16} color="white" />
+              Arma tu equipo de datos <Icon name="arrow-right" size={16} color="white" />
             </a>
           </div>
         </div>
       </section>
 
-      <div className="division-divider" />
+      <WaveDivider from={dk ? '#040514' : '#F0FDFE'} to={dk ? '#050510' : '#F0FDF7'} />
 
       {/* ── DIV 4: EQUIPOS MÉDICOS — 2-col header with image ── */}
       <section id="equipos-medicos" className="py-24 md:py-32 px-4 md:px-8 relative overflow-hidden" style={{ backgroundColor: dk ? '#050510' : '#F0FDF7' }}>
@@ -674,7 +783,7 @@ const AuraGarciaApp = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
             {medEquipServices.map((s, i) => (
-              <div key={i} className="p-7 rounded-2xl reveal-hidden delay-${i+1} card-hover"
+              <div key={i} className={`p-7 rounded-2xl reveal-hidden delay-${i+1} card-hover`}
                 style={{ background: dk ? 'rgba(16,185,129,0.05)' : 'rgba(16,185,129,0.04)', border: dk ? '1px solid rgba(16,185,129,0.18)' : '1px solid rgba(16,185,129,0.14)' }}>
                 <div className="icon-box mb-5" style={{ background: 'rgba(16,185,129,0.12)' }}>
                   <Icon name={s.icon} size={22} color="#34D399" />
@@ -696,7 +805,7 @@ const AuraGarciaApp = () => {
         </div>
       </section>
 
-      <div className="division-divider" />
+      <WaveDivider from={dk ? '#050510' : '#F0FDF7'} to={dk ? '#080808' : '#FFFBEB'} />
 
       {/* ── DIV 5: MARKETING DIGITAL — editorial list layout ── */}
       <section id="marketing-salud" className="py-24 md:py-32 px-4 md:px-8 relative overflow-hidden" style={{ backgroundColor: dk ? '#080808' : '#FFFBEB' }}>
@@ -745,7 +854,7 @@ const AuraGarciaApp = () => {
         </div>
       </section>
 
-      <div className="division-divider" />
+      <WaveDivider from={dk ? '#080808' : '#FFFBEB'} to={dk ? '#050510' : '#FAFAFA'} />
 
       {/* ── TESTIMONIOS ── */}
       <section id="testimonios" className="py-24 md:py-32 px-4 md:px-8" style={{ backgroundColor: dk ? '#050510' : '#FAFAFA' }}>
@@ -788,10 +897,17 @@ const AuraGarciaApp = () => {
           <div className="rounded-2xl p-8 md:p-12 reveal-hidden"
             style={{ background: dk ? 'linear-gradient(135deg,rgba(99,102,241,0.08),rgba(139,92,246,0.06))' : 'linear-gradient(135deg,#EEF2FF,#F5F3FF)', border: dk ? '1px solid rgba(99,102,241,0.15)' : '1px solid rgba(99,102,241,0.1)' }}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[['50+','Hospitales Transformados'],['3M+','Pacientes Impactados'],['6','Años de Experiencia'],['98%','Satisfacción Cliente']].map(([v, l]) => (
-                <div key={l}>
-                  <div className="text-3xl md:text-4xl font-light mb-2" style={{ color: '#818CF8' }}>{v}</div>
-                  <p className={`text-sm font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{l}</p>
+              {[
+                { end: 50, suffix: '+',  label: 'Hospitales Transformados' },
+                { end: 3,  suffix: 'M+', label: 'Pacientes Impactados' },
+                { end: 6,  suffix: '',   label: 'Años de Experiencia' },
+                { end: 98, suffix: '%',  label: 'Satisfacción Cliente' },
+              ].map(s => (
+                <div key={s.label}>
+                  <div className="text-3xl md:text-4xl font-light mb-2" style={{ color: '#818CF8' }}>
+                    <CountUp end={s.end} suffix={s.suffix} />
+                  </div>
+                  <p className={`text-sm font-light ${dk ? 'text-gray-400' : 'text-gray-500'}`}>{s.label}</p>
                 </div>
               ))}
             </div>
@@ -844,7 +960,7 @@ const AuraGarciaApp = () => {
                 </div>
                 <div>
                   <label className={`block text-sm font-light mb-2 ${dk ? 'text-gray-300' : 'text-gray-700'}`}>¿En qué podemos ayudarte? *</label>
-                  <textarea rows={4} placeholder="Cuéntanos sobre tu proyecto, desafíos actuales, timeline esperado..." className={`input-modern w-full px-4 py-3 rounded-2xl text-sm font-light resize-none ${dk ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
+                  <textarea rows={4} placeholder="Cuéntanos tu proyecto..." className={`input-modern w-full px-4 py-3 rounded-2xl text-sm font-light resize-none ${dk ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600' : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
                 </div>
                 <button type="submit" className="w-full btn-gradient-primary py-4 rounded-full text-sm font-medium inline-flex justify-center items-center gap-2">
                   Enviar mensaje <Icon name="arrow-right" size={16} color="white" />
@@ -904,7 +1020,7 @@ const AuraGarciaApp = () => {
               style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
               Transforma tu hospital<br />en semanas, no años
             </h2>
-            <p className="text-gray-400 text-base font-light max-w-sm">Primera consulta gratuita. Resultados medibles. Sin compromisos.</p>
+            <p className="text-gray-400 text-base font-light max-w-sm">Primera consulta gratuita. Sin compromiso.</p>
           </div>
           <div className="flex flex-col sm:flex-row lg:justify-end gap-4">
             <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer"

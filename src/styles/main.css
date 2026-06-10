@@ -39,6 +39,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Evita que el header fijo tape los títulos al navegar por anclas */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
 /* === VARIABLES CSS PARA MARCA AURAGARCIA === */
 :root {
   /* Colores AuraGarcia - Manual de Identidad Oficial */
