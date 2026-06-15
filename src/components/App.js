@@ -551,6 +551,7 @@ const AuraGarciaApp = () => {
                   <h3 className={`text-xs uppercase tracking-[0.3em] mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Recursos</h3>
                   <div className="space-y-3">
                     <a href="#recursos" className={`block text-sm transition-all duration-300 ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`} onClick={() => setIsDesktopMenuOpen(false)}>Recursos</a>
+                    <a href="paula.html" className={`block text-sm transition-all duration-300 ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}>Paula · Agente IA</a>
                     <a href="https://calendly.com/avragarcia" target="_blank" rel="noopener noreferrer" className={`block text-sm transition-all duration-300 ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}>Agendar Llamada</a>
                   </div>
                 </div>
