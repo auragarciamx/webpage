@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Paula — El agente de IA personalizable de AuraGarcia</title>
+    <meta name="description" content="Paula es el agente de IA de AuraGarcia: personalizable, conectado de forma segura a cualquier herramienta y disponible desde WhatsApp, Telegram o el canal que uses. Elige el modelo que quieras. Creada con OpenClaw.">
+    <meta name="keywords" content="Paula, agente de IA, AuraGarcia, asistente IA, WhatsApp, Telegram, OpenClaw, agente personalizable, automatización, integraciones seguras">
+    <meta name="author" content="AuraGarcia">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://auragarcia.com/paula.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://auragarcia.com/paula.html">
+    <meta property="og:title" content="Paula — El agente de IA personalizable de AuraGarcia">
+    <meta property="og:description" content="Personalizable, segura y conectada a tus herramientas. Habla con Paula desde WhatsApp, Telegram o el canal que uses, con el modelo de IA que prefieras.">
+    <meta property="og:image" content="https://auragarcia.com/resources/paula/paula-avatar.svg">
+    <meta property="og:site_name" content="AuraGarcia · Paula">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://auragarcia.com/paula.html">
+    <meta property="twitter:title" content="Paula — El agente de IA personalizable de AuraGarcia">
+    <meta property="twitter:description" content="Personalizable, segura y conectada a tus herramientas. Habla con Paula desde WhatsApp, Telegram o el canal que uses.">
+    <meta property="twitter:image" content="https://auragarcia.com/resources/paula/paula-avatar.svg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="resources/logos/AuragarciaLogoVector-2.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/logos/AuragarciaLogoVector-2.png">
+
+    <!-- Preload -->
+    <link rel="preload" href="src/styles/main.css" as="style">
+    <link rel="preload" href="src/config/app.config.js" as="script">
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+
+    <!-- Configuración global -->
+    <script src="src/config/app.config.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React y ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="src/styles/main.css">
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Paula",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web, WhatsApp, Telegram, Slack",
+      "description": "Agente de IA personalizable de AuraGarcia que se conecta de forma segura a cualquier herramienta desde el canal de mensajería que prefieras, con el modelo de IA que elijas. Creada con OpenClaw.",
+      "url": "https://auragarcia.com/paula.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "AuraGarcia",
+        "url": "https://auragarcia.com"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "description": "Plan Personal gratuito"
+      }
+    }
+    </script>
+</head>
+<body class="bg-black font-light antialiased">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50">
+        Saltar al contenido principal
+    </a>
+
+    <div id="root" role="main" aria-label="Paula — Agente de IA de AuraGarcia"></div>
+
+    <noscript>
+        <div style="padding: 2rem; text-align: center; background: #f3f4f6;">
+            <h1>Paula — El agente de IA de AuraGarcia</h1>
+            <p>Para una experiencia completa, por favor habilita JavaScript en tu navegador.</p>
+        </div>
+    </noscript>
+
+    <script type="text/babel" src="src/components/PaulaApp.js"></script>
+</body>
+</html>
