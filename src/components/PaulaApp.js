@@ -173,8 +173,43 @@ const PaulaApp = () => {
         )}
       </header>
 
+      {/* ===== HERO — PAULA × AURA ===== */}
+      <section id="inicio" className="relative min-h-screen flex items-end overflow-hidden" style={{ backgroundColor: '#0a0a0a' }}>
+        <img
+          src="resources/paula/hero-aura.webp"
+          alt="Paula Aura, la presencia inteligente de AuraGarcia"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+        {/* Scrim para legibilidad del texto */}
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: 'linear-gradient(to top, rgba(5,5,8,0.94) 0%, rgba(5,5,8,0.45) 38%, rgba(5,5,8,0.18) 65%, rgba(5,5,8,0.3) 100%)'
+        }}></div>
+
+        <div className="relative z-10 max-w-[1400px] mx-auto w-full px-4 sm:px-6 md:px-10 lg:px-14 pb-16 md:pb-24 pt-44">
+          <p className="uppercase tracking-[0.35em] text-[11px] text-white/60 mb-6 font-light">AuraGarcia presenta</p>
+          <h1 className="text-white font-light leading-[0.95] tracking-tight text-6xl sm:text-7xl md:text-8xl lg:text-[110px]" style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+            Paula <span className="font-extralight text-white/40 mx-1 md:mx-3">×</span> <span style={{ background: 'linear-gradient(95deg, #F5E6C8 0%, #7DD3FC 55%, #FDBA74 100%)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>Aura</span>
+          </h1>
+          <p className="mt-7 text-white/70 max-w-xl text-base md:text-lg font-light leading-relaxed">
+            Una presencia inteligente que escucha, entiende y actúa por tu empresa.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <a href="#contacto" className="btn-gradient-primary px-8 py-4 rounded-full text-base font-medium">Probar Paula</a>
+            <a href="#paula-producto" className="liquid-glass inline-flex items-center px-8 py-4 rounded-full text-base font-light text-white border border-white/10 transition-transform duration-300 hover:scale-105">Descubrir</a>
+            <span className="inline-flex items-center gap-2 ml-1 text-[11px] font-light text-white/50 uppercase tracking-[0.18em]">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-70"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-400"></span>
+              </span>
+              live voice agent
+            </span>
+          </div>
+        </div>
+      </section>
+
       {/* ===== PAULA — GRID PRINCIPAL ===== */}
-      <div id="inicio" className="pt-20 md:pt-24" style={{ backgroundColor: '#0a0a0a' }}>
+      <div style={{ backgroundColor: '#0a0a0a' }}>
         {typeof PaulaSection !== 'undefined' && <PaulaSection />}
       </div>
 
