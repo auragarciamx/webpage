@@ -3,7 +3,20 @@ name: Deploy AuraGarcia Webpage
 on:
   push:
     branches:
-      - main # Cambia 'main' por tu rama principal si es diferente
+      - main
+  # Permite lanzar el deploy manualmente desde la pestaña Actions,
+  # eligiendo protocolo sin necesidad de hacer push.
+  workflow_dispatch:
+    inputs:
+      protocol:
+        description: 'Protocolo de despliegue'
+        required: true
+        default: 'ftps'
+        type: choice
+        options:
+          - ftps
+          - ftp
+          - sftp
 
 jobs:
   deploy:
@@ -13,27 +26,51 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v4
 
-      # Paso opcional: Si necesitas compilar, instalar dependencias, etc.
-      # - name: Instalar dependencias
-      #   run: npm install
-      # - name: Compilar
-      #   run: npm run build
+      # Diagnóstico: qué puertos acepta el servidor.
+      # 21 abierto  -> FTP/FTPS explícito
+      # 990 abierto -> FTPS implícito
+      # 22 abierto  -> SFTP (requiere protocolo sftp)
+      # GitHub enmascara el valor del secret en los logs.
+      - name: Diagnóstico de conexión
+        continue-on-error: true
+        run: |
+          for port in 21 990 22; do
+            if timeout 8 bash -c "</dev/tcp/${{ secrets.FTP_SERVER }}/$port" 2>/dev/null; then
+              echo "✅ Puerto $port ABIERTO"
+            else
+              echo "❌ Puerto $port cerrado o sin respuesta"
+            fi
+          done
+          echo "Si solo el 22 está abierto, relanza este workflow (Run workflow) con protocolo 'sftp'."
 
-      - name: Despliegue por FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      # FTPS (por defecto) o FTP plano — puerto 21
+      - name: Despliegue por FTP/FTPS
+        if: ${{ github.event_name == 'push' || inputs.protocol != 'sftp' }}
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          # Servidor FTP
           server: ${{ secrets.FTP_SERVER }}
-          # Nombre de usuario FTP
           username: ${{ secrets.FTP_USERNAME }}
-          # Contraseña FTP
           password: ${{ secrets.FTP_PASSWORD }}
-          # Directorio local a subir (ej. 'dist' si se compila)
-          local-dir: ./ # Sube todo el repositorio, ajusta si es necesario
-          # Directorio remoto en el servidor FTP
-          server-dir: /public_html/ # Ajusta a la ruta de tu servidor
-          # Opciones de protocolo, por defecto es 'ftp', usa 'ftps' para cifrado
-          protocol: ftp
-          # Otras opciones:
-          # dry-run: true # Para probar sin subir
-          # exclude: .git .github
+          protocol: ${{ github.event_name == 'push' && 'ftps' || inputs.protocol }}
+          local-dir: ./
+          server-dir: /public_html/
+          timeout: 60000
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            vendor/**
+            preview*.html
+
+      # SFTP (puerto 22) — se usa al lanzar manualmente con protocolo 'sftp'
+      - name: Despliegue por SFTP
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.protocol == 'sftp' }}
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 22
+          sftp_only: true
+          local_path: './*'
+          remote_path: /public_html
