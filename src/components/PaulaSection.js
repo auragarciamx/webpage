@@ -213,7 +213,7 @@
           {/* Conecta Paula */}
           <div className="noise-overlay relative rounded-[2rem] p-5 md:p-6 border border-white/10 overflow-hidden"
             style={{ backgroundColor: '#243a3a' }}>
-            <a href="#integraciones" aria-label="Ver integraciones de Paula"
+            <a href="#contacto" aria-label="Conectar con Paula"
               className="liquid-glass z-20 h-9 w-9 rounded-full border border-white/10 flex items-center justify-center transition-transform duration-300 hover:scale-110"
               style={{ position: 'absolute', top: '1.25rem', right: '1.25rem' }}>
               <PsIcon name="ArrowUpRight" size={15} />
