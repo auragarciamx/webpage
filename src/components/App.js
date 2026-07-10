@@ -706,6 +706,48 @@ const AuraGarciaApp = () => {
             <div className={`w-24 h-0.5 mx-auto ${isDarkMode ? 'bg-blue-400' : 'bg-blue-700'}`}></div>
           </div>
 
+          {/* Paula — producto destacado (enlaza a su página) */}
+          <a
+            href="paula.html"
+            className="group relative block mb-12 rounded-[2rem] overflow-hidden border border-white/10 transition-all duration-500 hover:scale-[1.01] hover:border-white/20"
+            style={{ backgroundColor: '#0a0a0a' }}
+          >
+            <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{
+              background: [
+                'radial-gradient(ellipse 50% 80% at 85% 50%, rgba(139,92,246,0.28) 0%, transparent 65%)',
+                'radial-gradient(ellipse 45% 70% at 70% 40%, rgba(34,211,238,0.14) 0%, transparent 60%)',
+                'radial-gradient(ellipse 40% 60% at 15% 100%, rgba(251,146,60,0.10) 0%, transparent 60%)'
+              ].join(', ')
+            }}></div>
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10 p-8 md:p-10">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] text-cyan-300 border border-cyan-400/30 bg-cyan-400/10">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-70"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-400"></span>
+                    </span>
+                    Nuevo · Producto
+                  </span>
+                </div>
+                <h3 className="text-2xl md:text-4xl font-light text-white mb-3" style={{ fontFamily: 'Nortica, Girot, sans-serif' }}>
+                  Conoce a <span className="text-purple-300">Paula</span>
+                </h3>
+                <p className="text-sm md:text-base font-light text-white/60 max-w-xl leading-relaxed">
+                  Una agente inteligente para escuchar, entender y actuar. Conecta voz, documentos, procesos y datos internos de tu organización.
+                </p>
+              </div>
+              <div className="flex items-center gap-3 flex-shrink-0">
+                <span className="text-sm font-light text-white/80 group-hover:text-white transition-colors">Descubrir Paula</span>
+                <span className="h-10 w-10 rounded-full border border-white/20 bg-white/5 flex items-center justify-center transition-all duration-300 group-hover:bg-white/10 group-hover:scale-110">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+
           <div className="relative">
             <div 
               ref={scrollContainerRef}

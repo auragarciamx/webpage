@@ -317,6 +317,9 @@ const PaulaApp = () => {
         </div>
       </section>
 
+      {/* ===== PAULA — SECCIÓN PRODUCTO (bento premium) ===== */}
+      {typeof PaulaSection !== 'undefined' && <PaulaSection />}
+
       {/* ===== TIRA DE MODELOS / MARQUEE ===== */}
       <section className={`py-10 overflow-hidden border-y ${isDarkMode ? 'border-gray-800/60 bg-black' : 'border-gray-200/70 bg-white'}`}>
         <p className={`text-center text-xs uppercase tracking-[0.3em] mb-6 ${textFaint}`}>Funciona con el modelo que tú elijas — gracias a OpenClaw</p>
