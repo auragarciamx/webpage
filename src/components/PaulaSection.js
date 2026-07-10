@@ -39,8 +39,8 @@
     </span>
   );
 
-  // Textura de fondo opcional (si el PNG no existe, el gradiente encima lo cubre con gracia)
-  const PS_TEXTURE = "resources/u9313381789_Premium_dark_glassmorphism_card_background_for_Pa_07c10262-6bc7-4d82-810f-a1d3c3a056f9_0.png";
+  // Textura de fondo (versión WebP optimizada, 38 KB; original PNG de 7 MB en /resources)
+  const PS_TEXTURE = "resources/paula/card-texture.webp";
 
   const PS_ROW1 = ['Mic', 'MessageCircle', 'Search', 'FileText', 'Database', 'Brain', 'Workflow', 'PlugZap'];
   const PS_ROW2 = ['Headphones', 'AudioLines', 'Bot', 'ShieldCheck', 'Sparkles', 'ClipboardList', 'Send', 'Network'];
