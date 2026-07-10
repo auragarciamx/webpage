@@ -709,6 +709,15 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
+/* El display:inline-flex de arriba pisa la clase `hidden` de Tailwind
+   (main.css carga después). Restaura el ocultamiento en móvil para
+   botones marcados con `hidden md:inline-flex`. */
+@media (max-width: 767px) {
+  .btn-gradient-primary.hidden {
+    display: none;
+  }
+}
+
 /* === GLASS CARDS === */
 .card-glass-dark {
   background: rgba(255, 255, 255, 0.04);
